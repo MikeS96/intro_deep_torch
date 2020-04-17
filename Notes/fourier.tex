@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[backend=biber]{biblatex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\addbibresource{bib.bib}
+\setlength{\parindent}{0em}
+\bibliography{bib}
+\setlength{\parskip}{6pt}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{url}
+
+\title{Intro to deep learning with PyTorch}
+\author{Miguel A. Saavedra-Ruiz}
+\date{Abril 2020}
+\linespread{1.0}
+
+\nocite{*}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction to Neural Networks}
+
+Deep learning is everywhere, applications in games such as Go or jeopardy, detecting spam in emails, forecasting stock prices, recognizing images in a picture, and diagnosing illnesses sometimes with more precision than doctors are just few examples.
+
+The heart of Deep learning are object called \textbf{neural networks}. Neural networks vaguely mimic the process of how the brain operates, with neurons that fire bits of information. The next image shows a neural network \ref{fig:f1}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.35\textwidth,height=0.35\textheight,keepaspectratio]{images/nn.PNG}
+    \captionsetup{justification=centering}
+    \caption{A Neural network}
+    \label{fig:f1}
+\end{figure}
+
+A neural network is a function approximator which is capable to split data. Given some data in the form of blue or red points, the neural network will look for the best line that separates the data \ref{fig:f2}..
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.2\textwidth,height=0.2\textheight,keepaspectratio]{images/data.PNG}
+    \captionsetup{justification=centering}
+    \caption{A Neural network splitting data}
+    \label{fig:f2}
+\end{figure}
+
+The separation line is called a model and its job is to split the data. A model might not be perfect, but it most be as accurate as possible. Imagine the next example where we plot the acceptance rate of students based on their grades and test scores. The blue dots are accepted and red rejected. Furthermore, the line plotted is "the model" \ref{fig:f3}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/example_1.PNG}
+    \captionsetup{justification=centering}
+    \caption{Neural network model}
+    \label{fig:f3}
+\end{figure}
+
+Based on that, it is safe to predict that if a point is over the line the student gets accepted and if it's under the line then the student gets rejected.
+
+Taking into account that Test is label as \(x_1\) and Grades as \(x_2\), the \textbf{boundary line} that separates the blue and the red points is going to have a linear equation. The equation of the one drawn above is describes in \eqref{eq:1}.
+
+\begin{equation}
+2 x_1 + x_2 - 18 = 0 \label{eq:1}
+\end{equation}
+
+The equation \eqref{eq:1} means that the method for accepting or rejecting students says the following: take this equation as our score where \(score =2.Test + Grades - 18\), if a student has \(score > 0\) the he gets accepted, otherwise he is rejected. This process is called a prediction. Additionally, by convention it is possible to say that if the score is 0, the student will get accepted although this won't matter much at the end. \textbf{The linear equation is out model}.
+
+In the more general case, a boundary will be an equation of the following form \eqref{eq:2}.
+
+\begin{equation}
+wx_1+w_2x_2+b=0 \label{eq:2}
+\end{equation}  
+
+The last equation can be abbreviate in vector notation as \eqref{eq:3}.
+
+\begin{equation}
+wx+b=0 \label{eq:3}
+\end{equation}  
+
+Where w and x are vectors as shown below:
+
+\[ w = (w_1, w_2)\]
+\[ x = (x_1, x_2)\]
+
+X can be refereed as the input, w as the weights and b as the bias. For a student coordinates \(x_1, x_2\), a label denoted as Y will be used as the value to predict. So if the student gets accepted, namely the point is blue,
+then the label is \( y = 1\), And if the student gets rejected, namely the point is red and then the label is \( y = 0\)
+
+The prediction made by our algorithm is going to be called \(\hat{y}\) and it will be what the algorithm predicts that the label will be \eqref{eq:4}. Where one means accepted and zero rejected.
+
+\begin{equation}
+\label{eq:4}
+\hat{y} =
+  \begin{cases}
+    1, & \text{if } Wx + b \geq 0 \\
+    0, & \text{if } Wx + b \leq 0 \\
+  \end{cases}
+\end{equation}  
+
+So, to summarize, the points above the line have \( \hat{y} = 1\) and the points below the line have \( \hat{y} = 0\). And, the blue points have \( y = 1\) and the red points have \( y = 0\).
+
+Subsequently, if we have more data columns so not just testing grades, but maybe something else like the ranking of the student in the class it will turn the problem into a three-dimensional space. The only difference now is that the problem won't be working in two dimensions but three. So now, the three axis are: \(x_1\) for the test, \(x_2\) for the grades and \(x_3\) for the class ranking. The data will looks like Fig. \ref{fig:f4}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/example_2.PNG}
+    \captionsetup{justification=centering}
+    \caption{3D data example}
+    \label{fig:f4}
+\end{figure}
+
+The equation won't be a line in two dimension, but a plane in three dimensions with a similar equation as before. Now, the equation would be \eqref{eq:5} which will separate this space into two regions.
+
+\begin{equation}
+w_1x_1 + w_2x_2 + w_3x_3 + b = 0, \label{eq:5}
+\end{equation}  
+
+This equation \eqref{eq:5} can still be abbreviated by \eqref{eq:3} (\(wx+b=0\)) except our vectors will now have three entries instead of two. The prediction will be the same as described by \eqref{eq:4}.
+
+If we have many columns like say n of them as shown in Fig. \ref{fig:f5}, the data just leaps in n-dimensional space. Here the points are just things with n coordinates called \(x_1, x_2, x_3, \dots, x_n  \) with the labels being \(y\).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/multiple_dimension.PNG}
+    \captionsetup{justification=centering}
+    \caption{Multi-dimensional data}
+    \label{fig:f5}
+\end{figure}
+
+Therefore, the boundaries just an n minus one dimensional hyperplane, and the equation of this \(n-1\) dimensional hyperplane is going to be the one shown in \eqref{eq:6} or the abbreviated form shown in \eqref{eq:3} and the predictions still being the same as shown by equation \eqref{eq:4}.
+
+\begin{equation}
+w_1x_1 + w_2x_2 + \dots + w_n x_n + b = zero, \label{eq:6}
+\end{equation}  
+
+e.g Given the table in the Fig. \ref{fig:f5}, the dimensions for input features (x), the weights (W), and the bias (b) to satisfy (Wx + b) would be \( W(1xn), x(nx1) \text{and} b(1x1)\) for a single student.
+
+%\printbibliography
+
+\end{document}
