@@ -294,7 +294,7 @@ Similarly, if the misclassified point is located in the red area, instead of sub
   \end{cases}
 \end{equation}  
 
-Based on the technique given above, it is possible to determine the perceptron algorithm. This one is presented in the Fig. \ref{fig:f16} and shows and iterative process that tries to classify correctly all the misclassified points. The process works iteratively and can run until all the points are correctly classified or a minimum of misclassified points are obtained. A code example of this is given in \textit{introduction/perceptron_algorithm.py}
+Based on the technique given above, it is possible to determine the perceptron algorithm. This one is presented in the Fig. \ref{fig:f16} and shows and iterative process that tries to classify correctly all the misclassified points. The process works iteratively and can run until all the points are correctly classified or a minimum of misclassified points are obtained. A code example of this is given in \textit{introduction/perceptron\_algorithm.py}
   
 \begin{figure}[ht]
     \centering
@@ -304,6 +304,16 @@ Based on the technique given above, it is possible to determine the perceptron a
     \label{fig:f16}
 \end{figure}
   
+Let's look more carefully at the model presented in Fig. \ref{fig:f3} for accepting and rejecting students. Imagine that the student four got nine in the test but only one on the grades. According to the model this student gets accepted since it's placed in the positive region of this line. Nevertheless, this is not accurate. A more precise model is presented in Fig. \ref{fig:f7}, however, this is non-linear separable. To create an accurate model a different boundary should be used, two lines, a circle or a polynomial function are just few examples of this. Unfortunately, \textbf{the perceptron algorithm won't work well for non-linear problems}. Therefore, something more complex needs to be applied to redefine the simple perceptron algorithm for a line in a way that it'll generalize to other types of curves.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.35\textwidth,height=0.35\textheight,keepaspectratio]{images/non_linear.png}
+    \captionsetup{justification=centering}
+    \caption{Non-linear area}
+    \label{fig:f17}
+\end{figure}
+
 %\printbibliography
 
 \end{document}
