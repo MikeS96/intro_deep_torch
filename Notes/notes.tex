@@ -204,6 +204,28 @@ In reality, the perceptron can be seen as a combination of nodes, where the firs
     \label{fig:f10}
 \end{figure}
 
+The name "neural network" comes from the fact that perceptrons look like neurons in the brain. In the Fig. \ref{fig:f11} can be seen a perceptron in the Left with four inputs, these inputs are the dendrites in a Neuron and they receive nervous impulses. Similarly, the computation is made in the node of the perceptron or nucleus. Finally, the perceptron outputs the final result as a neuron does through its axon, which is the mechanism a neuron use to outputs nervous impulses. \textbf{The neural networks mimic the concept of neuron and brain} by taking the output from one neuron and turning it into the input for another one.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/perceotron_neuron.png}
+    \captionsetup{justification=centering}
+    \caption{The perceptron as a neuron}
+    \label{fig:f11}
+\end{figure}
+
+Perceptrons can be used as logic operators (AND, OR, XOR). E.g the ND operator can be represented as a two inputs perceptron with 1 output, where the inputs can be 1 or 0 as well as the output. To recall the true table of the perceptron, it is presented in Fig. \ref{fig:f12}. The perceptron presented in the same figure shows how it splits the points with a boundary line, where the dots in the red area corresponds to a zero and the point in the blue area corresponds to a one. In the file called \textit{introduction/and\_perceptron.py} can be seen an example of this which use the general equation of a boundary \eqref{eq:2} (\(wx_1+w_2x_2+b=0\)). 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/and_table.png}
+    \captionsetup{justification=centering}
+    \caption{True table of the AND operator}
+    \label{fig:f12}
+\end{figure}
+
+It is possible to represent logic operators as AND or OR with simple perceptrons, nevertheless, a problem araises when the problem has non-linear boundaries
+
 %\printbibliography
 
 \end{document}
