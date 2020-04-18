@@ -315,6 +315,10 @@ Let's look more carefully at the model presented in Fig. \ref{fig:f3} for accept
 \end{figure}
 
 To tackle Deep learning problems, it is necessary to introduce the concept of \textbf{Error function}. This is simply something that tells how far is the current model from the solution. An example of a simple error function used in the last example would be a function that tells how far is a point from its good classification region (distance).
+
+\textbf{Gradient descent} is a method to reduce the error of a problem and find the global optimum using known metrics. This algorithm calculates the error and then takes a step towards the direction that minimizes the error in a problem. As an example for the Fig. \ref{fig:f13} it is possible to construct an error function which consists of the sum of the distance of the points to the boundary lines, where the misclassified points have a big penalty while the well classifies have a low penalty. This function can be used to guide the boundary line towards a direction that minimizes the error and thus, find the optimal model to solve the problem. \textbf{Note:} the error function should be differentiable and continuous. 
+
+
 %\printbibliography
 
 \end{document}
