@@ -260,7 +260,7 @@ Now imagine the line plotted in Fig. \ref{fig:f14}, where the line equation is g
     \label{fig:f14}
 \end{figure}
 
-With the new parameters, the equation will be \(-1x_1+ 4-1x_2 - 11 = 0\). Nevertheless, this might be a very drastic change in the equation, leading to misclassification of other well-classified points. The idea is to make the line take small moves towards the misclassified point. To solve this, it is neccesary to take small steps towards the point, therefore, a new concept needs to be introduced. This concepts is called \textbf{learning rate}. The learning rate is a small number between zero and one and its function is to minimize the change in the model equation by multiplying its value to the values of the point. E.g, using a learning rate of \(0.1\) and the same example as before, the result will be the shown in the equation and Fig. \ref{fig:f15}
+With the new parameters, the equation will be \(-1x_1+ 4-1x_2 - 11 = 0\). Nevertheless, this might be a very drastic change in the equation, leading to misclassification of other well-classified points. The idea is to make the line take small moves towards the misclassified point. To solve this, it is neccesary to take small steps towards the point, therefore, a new concept needs to be introduced. This concepts is called \(\alpha\) or \textbf{learning rate}. The learning rate is a small number between zero and one and its function is to minimize the change in the model equation by multiplying its value to the values of the point. E.g, using a learning rate of \(0.1\) and the same example as before, the result will be the shown in the equation and Fig. \ref{fig:f15}
 
 \[
 \begin{bmatrix}  \text{new } w_1 \\
@@ -294,7 +294,15 @@ Similarly, if the misclassified point is located in the red area, instead of sub
   \end{cases}
 \end{equation}  
 
-
+Based on the technique given above, it is possible to determine the perceptron algorithm. This one is presented in the Fig. \ref{fig:f16} and shows and iterative process that tries to classify correctly all the misclassified points. The process works iteratively and can run until all the points are correctly classified or a minimum of misclassified points are obtained. A code example of this is given in \textit{introduction/perceptron_algorithm.py}
+  
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.2\textwidth,height=0.2\textheight,keepaspectratio]{images/perceotron_algorithm.png}
+    \captionsetup{justification=centering}
+    \caption{The perceptron Pseudocode}
+    \label{fig:f16}
+\end{figure}
   
 %\printbibliography
 
