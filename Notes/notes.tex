@@ -224,8 +224,78 @@ Perceptrons can be used as logic operators (AND, OR, XOR). E.g the ND operator c
     \label{fig:f12}
 \end{figure}
 
-It is possible to represent logic operators as AND or OR with simple perceptrons, nevertheless, a problem araises when the problem has non-linear boundaries
+It is possible to represent logic operators as AND or OR with simple perceptrons, nevertheless, a problem arises when the problem has non-linear boundaries. 
 
+To find the boundary line for a simple logic operator the process is really straightforward. Imagine a classification problem as shown by Fig. \ref{fig:f13}, the goal is to classify both the blue and red points correctly. However, there are one blue point and red point misclassified. To solve this, one logic approach would be to make the line closer to the misclassified points (located in the blue region) and hence change its label.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.25\textwidth,height=0.25\textheight,keepaspectratio]{images/split_data.png}
+    \captionsetup{justification=centering}
+    \caption{Splitting the data example}
+    \label{fig:f13}
+\end{figure}
+
+Now imagine the line plotted in Fig. \ref{fig:f14}, where the line equation is given by \(3x_1+ 4x_2 - 10 = 0\) and out labels are: blue area if \(\hat{y} > 0\) or red area if \(\hat{y} < 0\). Suppose that the line has coordinates \((4,5)\), based on the approach described above, the point coordinates should be subtracted to the line equation as shown by the equation below, where \(x_1 = 4, x_2 = 5 \text{ and } b = 1\).
+
+\[
+\begin{bmatrix}  \text{new } w_1 \\
+                 \text{new } w_2 \\
+                \text{new } b \end{bmatrix} = \begin{bmatrix}
+                                    3 - 4 \\
+                                    4 - 5 \\
+                                    -10 - 1
+                                    \end{bmatrix} = \begin{bmatrix}
+                                                    -1 \\
+                                                    -1 \\
+                                                    -11
+                                                    \end{bmatrix}
+\]
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.25\textwidth,height=0.25\textheight,keepaspectratio]{images/moving_line.png}
+    \captionsetup{justification=centering}
+    \caption{Making the line closer example}
+    \label{fig:f14}
+\end{figure}
+
+With the new parameters, the equation will be \(-1x_1+ 4-1x_2 - 11 = 0\). Nevertheless, this might be a very drastic change in the equation, leading to misclassification of other well-classified points. The idea is to make the line take small moves towards the misclassified point. To solve this, it is neccesary to take small steps towards the point, therefore, a new concept needs to be introduced. This concepts is called \textbf{learning rate}. The learning rate is a small number between zero and one and its function is to minimize the change in the model equation by multiplying its value to the values of the point. E.g, using a learning rate of \(0.1\) and the same example as before, the result will be the shown in the equation and Fig. \ref{fig:f15}
+
+\[
+\begin{bmatrix}  \text{new } w_1 \\
+                 \text{new } w_2 \\
+                \text{new } b \end{bmatrix} = \begin{bmatrix}
+                                    3 - 4*(0.1) \\
+                                    4 - 5*(0.1) \\
+                                    -10 - 1*(0.1)
+                                    \end{bmatrix} = \begin{bmatrix}
+                                                    2.6 \\
+                                                    3.5 \\
+                                                    -10.1
+                                                    \end{bmatrix}
+\]
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.25\textwidth,height=0.25\textheight,keepaspectratio]{images/new_line.png}
+    \captionsetup{justification=centering}
+    \caption{Moving the line closer to the point}
+    \label{fig:f14}
+\end{figure}
+
+Similarly, if the misclassified point is located in the red area, instead of subtracting the point to the model equation it needs to be added. As a thumb rule, the \eqref{eq:7} shows the process of adding or substracting based on the point's location.
+
+\begin{equation}
+\label{eq:7}
+  \begin{cases}
+    Substract, & \text{if } \text{point is located in region } > 0 \\
+    Add, & \text{if } \text{point is located in region } < 0 \\
+  \end{cases}
+\end{equation}  
+
+
+  
 %\printbibliography
 
 \end{document}
