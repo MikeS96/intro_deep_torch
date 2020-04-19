@@ -173,7 +173,7 @@ In the general case, a node looks like the one presented in Fig. \ref{fig:f8}.Th
     \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/general_perceptron.PNG}
     \captionsetup{justification=centering}
     \caption{General Perceptron}
-    \label{fig:8}
+    \label{fig:f8}
 \end{figure}
 
 In the last Figure, an implicit function is being used, this is called a step function. What the step function does is it returns a one if the input is positive or zero if the input is negative Fig. \ref{fig:f9}.
@@ -357,6 +357,14 @@ Using the Sigmoid function as the activation function to predict \(\hat{y}\), th
     \caption{Simple perceptron with a sigmoid activation function}
     \label{fig:f20}
 \end{figure}
+
+\textbf{The softmax function} is used when the problem has more than two classes and gives a probability of zero or one being zero as "not the class" and one as "object of this class". This is the equivalent of the sigmoid activation function, but when the problem has 3 or more classes. It is important to point out that the probability of all classes must add to one and there could not be any negative probability. To define the Softmax function let's imagine that there are N classes and a linear model that gives the following scores \( Z_1, Z_2, \dots Z_n\), each score for each of the classes in the problem. The softmax probability of the class \(Z_i\) is defined by the equation \eqref{eq:10}.
+
+\begin{equation}
+\label{eq:10}
+P(\text{class i}) = \frac{e^{Z_i}}{e^{Z_i} + \dots + e^{Z_n}}
+\end{equation} 
+
 %\printbibliography
 
 \end{document}
