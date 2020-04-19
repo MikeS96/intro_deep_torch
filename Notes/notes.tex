@@ -318,7 +318,45 @@ To tackle Deep learning problems, it is necessary to introduce the concept of \t
 
 \textbf{Gradient descent} is a method to reduce the error of a problem and find the global optimum using known metrics. This algorithm calculates the error and then takes a step towards the direction that minimizes the error in a problem. As an example for the Fig. \ref{fig:f13} it is possible to construct an error function which consists of the sum of the distance of the points to the boundary lines, where the misclassified points have a big penalty while the well classifies have a low penalty. This function can be used to guide the boundary line towards a direction that minimizes the error and thus, find the optimal model to solve the problem. \textbf{Note:} the error function should be differentiable and continuous. 
 
+Recall that a discrete prediction might be something like a 1 or zero, whereas a continuous prediction would be a number, normally between zero and one. As an example, see the  Fig. \ref{fig:f18} where we have students with discrete predictions (left) and continuous predictions(right). In the discrete plot, the algorithm will tell if a student is accepted (1 - blue) or rejected (0 - red). In the continuous plot, the farther the point is from the black line, the more drastic these probabilities are. Points that are well into the blue area get very high probabilities And points that are well into the red region are given very low probabilities. The points over the line are all given a 50\% probability. The probability is a function of the distance from the line.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/discrete_continuous.png}
+    \captionsetup{justification=centering}
+    \caption{Discrete and continuous predictions}
+    \label{fig:f18}
+\end{figure}
+
+To change from discrete to continuous predictions it is necessary to use a \textbf{Sigmoid function} (Fig. \ref{fig:f19}) instead of a unitary step as the activation function. This activation will guarantee a continuous functions instead of a discrete one, allowing the usage of gradient descent techniques. The equation of the Sigmoid function is given in the Equation \eqref{eq:8}. Before the model consisted of a line with a positive region and a negative region. With the Sigmoid function now it consists of an entire probability space for each point in the plane.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.35\textwidth,height=0.35\textheight,keepaspectratio]{images/sigmoid.png}
+    \captionsetup{justification=centering}
+    \caption{Sigmoid function}
+    \label{fig:f19}
+\end{figure}
+
+\begin{equation}
+\label{eq:8}
+\sigma(x) = \frac{1}{1 - e^{-x}} 
+\end{equation}  
+
+Using the Sigmoid function as the activation function to predict \(\hat{y}\), the output of the perceptron will be as follows Eq. \eqref{eq:9}. The simple perceptron seen in Fig. \ref{fig:f8} with a step function can be modified as shown by Fig. \ref{fig:f20} to work with a Sigmoid function as the activation function.  Before it used to say the student got accepted or not, with the Sigmoid function it says the probability of the student got accepted is this much.
+
+\begin{equation}
+\label{eq:9}
+\hat{y} = \sigma(Wx + b)
+\end{equation} 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.30\textwidth,height=0.30\textheight,keepaspectratio]{images/perceptron_sigmoid.png}
+    \captionsetup{justification=centering}
+    \caption{Simple perceptron with a sigmoid activation function}
+    \label{fig:f20}
+\end{figure}
 %\printbibliography
 
 \end{document}
