@@ -365,6 +365,16 @@ Using the Sigmoid function as the activation function to predict \(\hat{y}\), th
 P(\text{class i}) = \frac{e^{Z_i}}{e^{Z_i} + \dots + e^{Z_n}}
 \end{equation} 
 
+When there are multiple output classes, it is necessary to use a specific output format called \textbf{one-hot encoding}. This format assign one variable per class and outputs a one in the specific class that is selected.  Imagine that the classes are Duck, Beaver and Walrus. Here it is necessary to assign one variable for each of the classes. In the Fig. \ref{fig:f21} That's one variable for Duck, one for Beaver and one for Walrus And, each one has its corresponding column. E.g., if the input is a duck then the variable for duck is 1 and the variables for beaver and walrus are 0.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/one_hot.png}
+    \captionsetup{justification=centering}
+    \caption{One-hot encoding}
+    \label{fig:f21}
+\end{figure}
+
 \printbibliography
 
 \end{document}
