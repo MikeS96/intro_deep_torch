@@ -375,6 +375,17 @@ When there are multiple output classes, it is necessary to use a specific output
     \label{fig:f21}
 \end{figure}
 
+\textbf{Maximum likelihood} is when the model picked gives the existing labels the highest probability. Thus, by maximizing the probability, it is possible to pick the best possible model. To use an example of how maximum likelihood works, see the model presented in Fig. \ref{fig:f22}, where the value presented in each dot is the probability of being blue or red (determined by the color of the number). To determine which model is better, it is necessary to compute the probability of the four points, this probability is called the \textbf{probability space} and will tell if the points are of the colors that they actually are. For the left model, the probability space is \[0.1 x 0.6 x 0.7 x 0.2 = 0.0084\] which is a very small value, whereas for the right model the probability space is \[0.7 x 0.8 x 0.9 x 0.6 = 0.3024\]. This value means that the probability that the points of the left model are of these colors is 0.0084 and the right model is 0.3024, therefore, it confirms that the model on the right is better because it makes the arrangement of the points much more likely to have those colors. If the likelihood or probability space of the model is improved, hence the model will be better/
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/likelihood.png}
+    \captionsetup{justification=centering}
+    \caption{Maximum likelihood example}
+    \label{fig:f22}
+\end{figure}
+
+
 \printbibliography
 
 \end{document}
