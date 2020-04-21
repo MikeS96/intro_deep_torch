@@ -414,7 +414,7 @@ When there are more than two classes, the equation of cross-entropy has to chang
     \label{fig:f24}
 \end{figure}
 
-Expressing this mathematically as shown by Fig. \ref{fig:f25} the output \(y_{ij}\) is one if a specific class is obtained from the door \(j\). Therefore, the equation for \textbf{multi-class entropy} is given by Eq. \eqref{eq:9} where n is the number of classes.
+Expressing this mathematically as shown by Fig. \ref{fig:f25} the output \(y_{ij}\) is one if a specific class is obtained from the door \(j\). Therefore, the equation for \textbf{multi-class entropy} is given by Eq. \eqref{eq:12} where m is the number of classes.
 
 \begin{figure}[ht]
     \centering
@@ -425,11 +425,55 @@ Expressing this mathematically as shown by Fig. \ref{fig:f25} the output \(y_{ij
 \end{figure}
 
 \begin{equation}
-\label{eq:11}
-Cross-Entropy = - \sum_{i = 1}^n \sum_{j=1}^m y_{ij}  \ln{p_{ij}}
+\label{eq:12}
+Cross-Entropy = - \sum_{i = 1}^m \sum_{j=1}^n y_{ij}  \ln{p_{ij}}
 \end{equation} 
+
+Recall the Fig. \ref{fig:f23} where there are two models and the cross-entrophy was calculated. The cross-entropy calculation gave 4.8 for the left model and 1.2 for the right model. The expression given in Eq \eqref{eq:13} can be used as an error given the following data. Consider that if \(y = 1\) which is blue class then \(P(blue) = \hat{y}\), therefore \(Error = -\ln{(\hat{y})}\). Now, analizing the red classification if \(y = 0\) (red class) then \(P(red) = 1 - P(blue) = 1 - \hat{y}\), thus the error for the red class would be \(Error = -\ln{(1 - \hat{y})}\).
+
+The last analizis leads to the next Error expression.
+
+\begin{equation}
+\label{eq:13}
+Error = -(1 - y)(\ln{(1 - \hat{y})} - y\ln{(\hat{y})}
+\end{equation} 
+
+The expression given in Eq \eqref{eq:13} can be used as an error, so changing the notation the error function and averaging by m gives the Equation in \eqref{eq:14}.
+
+\begin{equation}
+\label{eq:14}
+Error = - \frac{1}{m} \sum_{i=1}^m (1 - y_i) (\ln{(1 - \hat{y})}) + y_i\ln{(\hat{y})}
+\end{equation} 
+
+Where \(\hat{y}\) is the output of the network. Transforming \(\hat{y}\) in terms of Eq. \eqref{eq:9}, the Eq. \eqref{eq:14} will be as follows (Eq. \eqref{eq:15}).
+
+\begin{equation}
+\label{eq:15}
+E(W,b) = - \frac{1}{m} \sum_{i=1}^m (1 - y_i) (\ln{(1 - \sigma(Wx^{(i)} + b))}) + y_i\ln{(\sigma(Wx^{(i)} + b))}
+\end{equation} 
+
+The goal is to minimize the Error function given by Eq. \eqref{eq:15}. Now if there are more than two classes, the only change would be add the additional summation as shown by Eq. \eqref{eq:12} to the error function. The Error function for more than one class is given as follow Eq. \eqref{eq:16}.
+
+\begin{equation}
+\label{eq:16}
+E(W,b) = - \frac{1}{m} \sum_{i=1}^m \sum_{j=1}^n y_{ij}\ln{(\sigma(Wx^{(i)} + b))} 
+\end{equation} 
+
+Minimizing this error leads to an algorithm called \textbf{Logistic regression } which is very popular in Machine Learning and AI. The procedure of this algorithm is given as follows:
+
+\begin{itemize}
+  \item Take the data
+  \item Pick a random model
+  \item Calculate the error
+  \item Minimize the error, and obtain a better model
+\end{itemize}
+
+Now, to accomplish the last step of the items and minimize the error it is necessary to use the gradient descent algorithm which will allow the minimization of the error and pass from \(E(W,b)\) to \(E(W',b')\) where \(E(W',b') < E(W,b)\).
+
+
 
 
 \printbibliography
 
 \end{document}
+
