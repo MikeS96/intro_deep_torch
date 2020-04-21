@@ -397,6 +397,13 @@ Using the Cross Entropy concept in the last example the result can be seen in Fi
     \label{fig:f23}
 \end{figure}
 
+The formula of the Cross-entropy is given in Eq. \eqref{eq:11} where \(y_i\) is the true label of the class being 1 for blue and 0 for red (see Fig. \ref{fig:f23}). If \(y_i\) is one, then the probability is \(p_i\), otherwise the probability will be \((1 - p_i)\) which is the probability for \(y_i = 0\).
+
+\begin{equation}
+\label{eq:11}
+Cross-Entropy = - \sum_{i = 1}^m y_i \ln{p_i} + (1 - y_i) \ln{(1 - p_i)}
+\end{equation} 
+
 \printbibliography
 
 \end{document}
