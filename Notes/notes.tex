@@ -385,7 +385,17 @@ When there are multiple output classes, it is necessary to use a specific output
     \label{fig:f22}
 \end{figure}
 
-Maximizing the probability is equivalent to minimizing the error function and thus, improve the model. To start with this, it is important to transform the products of the probability of the whole arrangement into a sum, this is possible by passing the individual probabilities in a logarithmic function owing to \(\log(ab) = \log(a) + \log(b)\).
+Maximizing the probability is equivalent to minimizing the error function and thus, improve the model. To start with this, it is important to transform the products of the probability of the whole arrangement into a sum, this is possible by passing the individual probabilities in a logarithmic function owing to \(\ln{ab} = \ln{a} + \ln{b}\). Applying logarithms to the example shown in Fig. \ref{fig:f22}, and taking into account that the logarithm of a number between zero and one is always negative, it is possible to use the sum of the negatives of the logarithms instead of a positive sum. Therefore, the model of the left gives \(\ln{0.6} - \ln{0.2} - \ln{0.1} - \ln{0.7} = 4.8\) ad \(\ln{0.8} - \ln{0.6} - \ln{0.7} - \ln{0.9} = 1.2\). This concepts of the negative sum of logarithms is called \textbf{Cross entropy} and it gives a high value for bad models (left) and low values for good models (right) which is a measurement of how good the model is. 
+
+Using the Cross Entropy concept in the last example the result can be seen in Fig. \ref{fig:f23}. The Cross Entropy of misclassified points have really high values whereas the well classified points have low values. Thus it is possible to think of the negatives of these logarithms as errors at each point. Points that are correctly classified will have small errors and points that are misclassified will have large errors. With this it is feasible to concluded that the cross entropy will tell us if a model is good or bad. The goal has changed from maximizing a probability to minimizing a cross entropy in order to get from the model in left to the model in the right in Fig. \ref{fig:f23}. \textbf{The error-function is the cross entropy}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/cross_entrophy.png}
+    \captionsetup{justification=centering}
+    \caption{Using Cross Entropy example}
+    \label{fig:f23}
+\end{figure}
 
 \printbibliography
 
