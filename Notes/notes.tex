@@ -452,11 +452,11 @@ Where \(\hat{y}\) is the output of the network. Transforming \(\hat{y}\) in term
 E(W,b) = - \frac{1}{m} \sum_{i=1}^m (1 - y_i) (\ln{(1 - \sigma(Wx^{(i)} + b))}) + y_i\ln{(\sigma(Wx^{(i)} + b))}
 \end{equation} 
 
-The goal is to minimize the Error function given by Eq. \eqref{eq:15}. Now if there are more than two classes, the only change would be add the additional summation as shown by Eq. \eqref{eq:12} to the error function. The Error function for more than one class is given as follow Eq. \eqref{eq:16}.
+The goal is to minimize the Error function given by Eq. \eqref{eq:15}. Now if there are more than two classes, the only change would be to add the additional summation as shown by Eq. \eqref{eq:12} to the error function. The Error function for more than one class is given as follows Eq. \eqref{eq:16}.
 
 \begin{equation}
 \label{eq:16}
-E(W,b) = - \frac{1}{m} \sum_{i=1}^m \sum_{j=1}^n y_{ij}\ln{(\sigma(Wx^{(i)} + b))} 
+E(W,b) = - \frac{1}{m} \sum_{i=1}^m \sum_{j=1}^n y_{ij}\ln{(\sigma(Wx^{(ij)} + b))} 
 \end{equation} 
 
 Minimizing this error leads to an algorithm called \textbf{Logistic regression } which is very popular in Machine Learning and AI. The procedure of this algorithm is given as follows:
@@ -469,7 +469,6 @@ Minimizing this error leads to an algorithm called \textbf{Logistic regression }
 \end{itemize}
 
 Now, to accomplish the last step of the items and minimize the error it is necessary to use the gradient descent algorithm which will allow the minimization of the error and pass from \(E(W,b)\) to \(E(W',b')\) where \(E(W',b') < E(W,b)\).
-
 
 Imagine a person somewhere in a Mount where the objective is to go down Fig. \ref{fig:f26}. The inputs of the functions are \(W_1\) and \(W_2\), the error function is given by E. The gradient of E (\(\nabla E\)) is given by the vector sum of the partial derivatives \(\frac{\partial E}{\partial w_1}\) and \(\frac{\partial E}{\partial w_2}\). This gradient actually tells the direction the person has to move if he want to increase the error function the most (go up). Thus, taking the negative of the gradient,leads to decrease the error function the most. Taking the negative direction of the gradient will eventually take the person to the bottom of the mountain and decrease the error to a minimum expression. Additinally, taking steps in the direction of the negative of the gradient will also change the Weights and Bias values. This is basically the \textbf{gradient descent} algorithm. 
 
@@ -504,6 +503,95 @@ Multiplying the gradient by the learning rate \(\alpha\) and taking a step is th
 The bias will now become:
 
 \[b_i' \leftarrow b - \alpha \frac{\partial E}{\partial b}\]
+
+The full derivation of the gradient descent is as follows. First of all, it is necessary to compute the derivative of the sigmoid function (supposing that this is our activation function) which is Eq. \eqref{eq:17}
+
+\begin{equation}
+\label{eq:17}
+\sigma'(x) = \sigma(x)(1 - \sigma(x)) 
+\end{equation} 
+
+The demonstration of the last result is shown below.
+
+\[\sigma'(x) = \frac{\partial}{\partial x} \frac{1}{1 + e ^{-x}}\]
+\[\sigma'(x) = \frac{e ^{-x}}{(1 + e ^{-x})^2}\]
+\[\sigma'(x) = \frac{1}{1 + e ^{-x}} \frac{e ^{-x}}{1 + e ^{-x}}\]
+\[\sigma'(x) = \sigma(x)(1 - \sigma(x)) \]
+
+Recall the Fig. \ref{fig:f23} where there are m points labeled \(X^{(1)}, X^{(2)}, \dots, X^{(m)} \), thus the error equation would be Eq. \eqref{eq:14}
+
+\[E = - \frac{1}{m} \sum_{i=1}^m y_i\ln{(\hat{y})} + (1 - y_i) (\ln{(1 - \hat{y})})\]
+
+The goal is to calculate \(\nabla E\), at a point \(x = (x_1, x_2,\dots,x_n)\)), given by the partial derivatives
+
+\[\nabla E = \frac{\partial E}{\partial w_1}, \dots, \frac{\partial E}{\partial w_n}, \frac{\partial E}{\partial b}\]
+
+To simplify the calculations, think of the error that each point produces, and calculate the derivative of this error. The total error, then, is the average of the errors at all the points. The error produced by each point is:
+
+\[ E = -y_i\ln{(\hat{y})} - (1 - y_i) (\ln{(1 - \hat{y})})\]
+
+In order to calculate the derivative of this error with respect to the weights, first calculate \(\frac{\partial \hat{y}}{\partial w_j}\), recalling that \(\hat{y} = \sigma(Wx + b) = \sigma(\theta)\). The 
+
+\[\frac{\partial \hat{y}}{\partial w_j} = \frac{\partial}{\partial w_j} \sigma(Wx + b) \]
+\[\frac{\partial \hat{y}}{\partial w_j} = \sigma(Wx + b)(1 - \sigma(Wx + b)) \frac{\partial}{\partial w_j}Wx + b \]
+\[\frac{\partial \hat{y}}{\partial w_j} = \hat{y}(1 - \hat{y}) \frac{\partial}{\partial w_j}(w_1x_1+\dots+w_ix_i+\dots+w_nx_n, + b) \]
+\[\frac{\partial \hat{y}}{\partial w_j} = \hat{y}(1 - \hat{y}) x_i \]
+
+The last equality is because the only term in the sum which is not a constant with respect to \(w_j\) is \( w_jx_j\) which clearly has derivative \(x_j\).
+
+Reall that the gradient descent is based on the chain rule, which would be the one described in Eq. \eqref{eq:18}
+
+\begin{equation}
+\label{eq:18}
+\frac{\partial E}{\partial w_j} = \frac{\partial E}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial w_j} =  \frac{\partial E}{\partial \hat{y}} \frac{\partial \sigma(\theta)}{\partial \theta} \frac{\partial \theta}{\partial w_j}
+\end{equation} 
+
+Now, To calculate the derivative of the error \(E\) at a point \(x\) with respect to the weight \(w_j\) is as follows.
+
+\[\frac{\partial E}{\partial w_j} = \frac{\partial}{\partial w_j} [-y\ln{(\hat{y})} - (1 - y) (\ln{(1 - \hat{y})})] \]
+\[\frac{\partial E}{\partial w_j} = -y \frac{\partial}{\partial w_j} \ln{(\hat{y})} - (1 - y) \frac{\partial}{\partial w_j} \ln{(1 - \hat{y})} \]
+\[\frac{\partial E}{\partial w_j} = -y \frac{1}{\hat{y}} \frac{\partial}{\partial w_i} \hat{y} - (1 - y) \frac{1}{1 - \hat{y}} \frac{\partial}{\partial w_i} (1 - \hat{y}) \]
+\[\frac{\partial E}{\partial w_j} = -y \frac{1}{\hat{y}} \hat{y}(1 - \hat{y}) x_i - (1 - y) \frac{1}{1 - \hat{y}} (-1)(\hat{y}(1 - \hat{y}) x_i) \]
+\[\frac{\partial E}{\partial w_j} = -y (1 - \hat{y}) x_i + (1 - y)\hat{y}x_i \]
+\[\frac{\partial E}{\partial w_j} = -(y - \hat{y})x_i \]
+
+The Eq. \eqref{eq:19} gives the gradient of the weights.
+
+\begin{equation}
+\label{eq:19}
+\frac{\partial E}{\partial w_j} = -(y - \hat{y})x_i
+\end{equation} 
+
+Similarly, the result for the bias is Eq. \eqref{eq:20}
+
+\[ \frac{\partial E}{\partial b} = \frac{\partial E}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial b} =  \frac{\partial E}{\partial \hat{y}} \frac{\partial \sigma(\theta)}{\partial \theta} \frac{\partial \theta}{\partial b} \]
+
+\begin{equation}
+\label{eq:20}
+\frac{\partial E}{\partial b} = -(y - \hat{y})
+\end{equation} 
+
+In summary the gradient is:
+
+\[\nabla E = -(y - \hat{y})(x_1,\dots ,x_n,1)\]
+
+Therefore, a small gradient means that it changes the coordinates by a little bit, and a large gradient means it changes the coordinates by a lot.
+
+\textbf{The gradient descent step} rule to update the weights is as follows Eq. \eqref{eq:21}
+
+\begin{equation}
+\label{eq:21}
+w_i' \leftarrow w_i - \alpha-(y - \hat{y})x_i = w_i + \alpha(y - \hat{y})x_i
+\end{equation}
+
+To update the bias the equation is the next:
+
+\begin{equation}
+\label{eq:22}
+b' \leftarrow b + \alpha(y - \hat{y})
+\end{equation}
+
+Note: Since the average of the errors were taken, the term added should be \(\frac{1}{m}*\alpha\) instead of \(\alpha\) but as \(\alpha\) is a constant, then in order to simplify calculations, it is possible to take \(\frac{1}{m}*\alpha\) to be the learning rate, and abuse the notation by just calling it \(\alpha\).
 
 
 \printbibliography
