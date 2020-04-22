@@ -471,6 +471,39 @@ Minimizing this error leads to an algorithm called \textbf{Logistic regression }
 Now, to accomplish the last step of the items and minimize the error it is necessary to use the gradient descent algorithm which will allow the minimization of the error and pass from \(E(W,b)\) to \(E(W',b')\) where \(E(W',b') < E(W,b)\).
 
 
+Imagine a person somewhere in a Mount where the objective is to go down Fig. \ref{fig:f26}. The inputs of the functions are \(W_1\) and \(W_2\), the error function is given by E. The gradient of E (\(\nabla E\)) is given by the vector sum of the partial derivatives \(\frac{\partial E}{\partial w_1}\) and \(\frac{\partial E}{\partial w_2}\). This gradient actually tells the direction the person has to move if he want to increase the error function the most (go up). Thus, taking the negative of the gradient,leads to decrease the error function the most. Taking the negative direction of the gradient will eventually take the person to the bottom of the mountain and decrease the error to a minimum expression. Additinally, taking steps in the direction of the negative of the gradient will also change the Weights and Bias values. This is basically the \textbf{gradient descent} algorithm. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/gradient.png}
+    \captionsetup{justification=centering}
+    \caption{Gradient descent example}
+    \label{fig:f26}
+\end{figure}
+
+To calculate the gradient the next equations are used. First of all the initial prediction is given by the next equation.
+
+\[\hat{y} = \sigma(Wx + b)\]
+
+Writing the prediction in terms of the vectors W and B gives.
+
+\[\hat{y} = \sigma(W_1X_1 + \dots + W_nX_n + b)\]
+
+The gradient of the error function is the vector formed by the partial derivative of the error function with respect to the weights and the bias.
+
+\[\nabla E = (\frac{\partial E}{\partial W_1}, \dots, \frac{\partial E}{\partial W_2}, \frac{\partial E}{\partial b})\]
+
+To avoid any drastic changes, a small learning rate alpha is introduced.
+
+\[\alpha = 0.1\]
+
+Multiplying the gradient by the learning rate \(\alpha\) and taking a step is the negative direction of the gradient is the same thing as updating the weights and the bias as follows, where the weight \(W_i\) will now become \(W_i'\)
+
+\[w_i' \leftarrow w_i - \alpha \frac{\partial E}{\partial W_i}\]
+
+The bias will now become:
+
+\[b_i' \leftarrow b - \alpha \frac{\partial E}{\partial b}\]
 
 
 \printbibliography
