@@ -281,7 +281,7 @@ With the new parameters, the equation will be \(-1x_1+ 4-1x_2 - 11 = 0\). Nevert
     \includegraphics[width=0.25\textwidth,height=0.25\textheight,keepaspectratio]{images/new_line.png}
     \captionsetup{justification=centering}
     \caption{Moving the line closer to the point}
-    \label{fig:f14}
+    \label{fig:f15}
 \end{figure}
 
 Similarly, if the misclassified point is located in the red area, instead of subtracting the point to the model equation it needs to be added. As a thumb rule, the \eqref{eq:7} shows the process of adding or substracting based on the point's location.
@@ -304,7 +304,7 @@ Based on the technique given above, it is possible to determine the perceptron a
     \label{fig:f16}
 \end{figure}
   
-Let's look more carefully at the model presented in Fig. \ref{fig:f3} for accepting and rejecting students. Imagine that the student four got nine in the test but only one on the grades. According to the model this student gets accepted since it's placed in the positive region of this line. Nevertheless, this is not accurate. A more precise model is presented in Fig. \ref{fig:f7}, however, this is non-linear separable. To create an accurate model a different boundary should be used, two lines, a circle or a polynomial function are just few examples of this. Unfortunately, \textbf{the perceptron algorithm won't work well for non-linear problems}. Therefore, something more complex needs to be applied to redefine the simple perceptron algorithm for a line in a way that it'll generalize to other types of curves.
+Let's look more carefully at the model presented in Fig. \ref{fig:f3} for accepting and rejecting students. Imagine that the student four got nine in the test but only one on the grades. According to the model this student gets accepted since it's placed in the positive region of this line. Nevertheless, this is not accurate. A more precise model is presented in Fig. \ref{fig:f7}, however, this is non-linear separable. To create an accurate model a different boundary should be used, two lines, a circle or a polynomial function are just few examples of this. Unfortunately, \textbf{the perceptron algorithm won't work well for non-linear problems}. Therefore, something more complex needs to be applied to redefine the simple perceptron algorithm for a line in a way that it'll generalize to other types of curves. Nevertheless, this problem will be tackle later.
 
 \begin{figure}[ht]
     \centering
@@ -603,7 +603,9 @@ The gradient descent algorithm is given in the Fig. \ref{fig:f27}.
     \label{fig:f27}
 \end{figure}
 
+Recall the problem presented in Fig. \ref{fig:f17}, where the problem was not linear separable. To tackle this problem it is necessary to generate a non-linear probability distribution which accurately classified the blue and red points. 
 
 \printbibliography
 
 \end{document}
+
