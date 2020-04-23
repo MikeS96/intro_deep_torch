@@ -655,6 +655,42 @@ Neural networks have a certain special \textbf{architecture} with layers. The fi
 
 Finally, \textbf{adding more outputs} creates multiple categories and opens the possiblity to classify different things like cat, dogs or birds. \textbf{Note:} if the model has multiple outputs, it is necessary to change the activation in the last function for a Softmax activation function and add as many outputs as classes are present in the problem. This activation function will guarantee a probability distribution in the last layer and will show which of the classes is the selected one with the highest probability.
 
+\textbf{Feedforward} is the process neural networks use to turn the input into an output, passing the whole data throughout the network. In the Fig. \ref{fig:f31} is an example of this with a network with two input layers, two hidden units and one output. The Weights \(W^{1}\) corresponds to the weights between the input layer and the hidden layer, for a matter of simplicity, the bias was added to this set of weights. Similarly, the weights \(W^{2}\) are between the hidden layer and the output layer. Mathematically, the feedforward process can be expressed as shown by Eq. \eqref{eq:23}.
+
+\begin{equation}
+\label{eq:23}
+\hat{y} = \sigma(\sigma (\begin{bmatrix}
+           x_{1} \\
+           x_{2} \\
+           1
+         \end{bmatrix} \cdot \begin{pmatrix}
+                                W_{11}^{(1)} & W_{12}^{(1)} \\
+                                W_{21}^{(1)} & W_{22}^{(1)} \\
+                                W_{31}^{(1)} & W_{32}^{(1)}
+                                \end{pmatrix} ) \cdot \begin{bmatrix}
+                                                           W_{11}^{(2)} \\
+                                                           W_{21}^{(2)} \\
+                                                           W_{31}^{(2)}
+                                                         \end{bmatrix})
+\end{equation}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/feedforward.png}
+    \captionsetup{justification=centering}
+    \caption{Feedforward in a neural network}
+    \label{fig:f31}
+\end{figure}
+
+Equation \eqref{eq:23} can be simplied into Eq. \eqref{eq:24}. As a rule of thumb, feedforward takes the input vector and then apply a sequence of linear models and sigmoid functions or whatever activation function is used in the network. The feedforward process is used to obtain the prediction from the input vector. These steps can be extended into more deep networks as the procedure is always the same.
+
+\begin{equation}
+\label{eq:24}
+\hat{y} = \sigma(\sigma(W^{(1)} \cdot X) \cdot W^{(2)})
+\end{equation}
+
+The error function for a multi-layer perceptron is exactly the same used for the perceptron algorithm which is Eq. \eqref{eq:14} or the Cross-entropy. Similarly, \(\hat{y} = \sigma(Wx + b)\) but for a neural netowrk with multiple layers, the only difference is that \(\hat{y}\) is more complex and is a combination of multiplications and sigmoid functions as shown here \[\hat{y} = \sigma W^{(3)} \cdot \sigma W^{(2)} \cdot \sigma W^{(1)} \cdot X \]
+
 \printbibliography
 
 \end{document}
