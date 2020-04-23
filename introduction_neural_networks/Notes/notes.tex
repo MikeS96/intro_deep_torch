@@ -653,7 +653,7 @@ Neural networks have a certain special \textbf{architecture} with layers. The fi
 
 \textbf{Adding hidden layers} increase the amount of representations that can be generated with the neural network and create more complex boundaries than with only two layers. 
 
-Finally, \textbf{adding more outputs} creates multiple categories and opens the possiblity to classify different things like cat, dogs or birds. 
+Finally, \textbf{adding more outputs} creates multiple categories and opens the possiblity to classify different things like cat, dogs or birds. \textbf{Note:} if the model has multiple outputs, it is necessary to change the activation in the last function for a Softmax activation function and add as many outputs as classes are present in the problem. This activation function will guarantee a probability distribution in the last layer and will show which of the classes is the selected one with the highest probability.
 
 \printbibliography
 
