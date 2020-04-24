@@ -868,6 +868,12 @@ One way to prevent this is use L1 (Eq. \eqref{eq:30}) and L2 regularization (Eq.
 \end{equation}
 
 The main difference between L1 and L2 is that L1 is good for feature selection because at the end the model end up with sparse vectors \([0,1,1,0,0]\) this means that small weights then to go to zero and big ones to one. However, L2 is normally better for training models because it tries to maintain all the weights homogeneously small \([0.2, 0.5, 0.7 ,0.9, 0.2]\).
+
+\textbf{Dropout} is another technique to prevent overfitting. This technique randomly turn off some of the nodes and prevents the data to pass through there. In that case, the other nodes have to pick up the slack and take more part in the training. This process improves the training process a guarantee a good training of all the nodes in the network. Each epoch different nodes are turned off and this is governed by a probability, let's say \(0.2\) this probability means that per each epoch, each node has a probability of 20\% to be turned off. 
+
+
+
 \printbibliography
 
 \end{document}
+
