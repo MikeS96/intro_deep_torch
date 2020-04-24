@@ -831,17 +831,43 @@ In the Fig. \ref{fig:f35} can be seen an example of how a underfitting, just rig
 
 To try to solve this problem, it is better to always try to go for a slightly overfitting model. The idea is to approach as close as possible to the solution and then use some techniques to avoid overfitting.
 
-One technique to solve the overfitting issue is called early stopping, and this is presented in Fig. \ref{fig:f36}. The plot is called the model complexity graph. In the Y-axis, there is a measure of the error and in the X-axis is a measure of the complexity of the model. In this case, the measure of complexity is the number of epochs. It is possible to see in the figure that in the left are high testing and training error, hence the model is underfitting. In the right, there are a high testing error and low training error, therefore the model is overfitting. Nevertheless in the middle is the right spot to obtain the best train and test error, the main idea of this plot is to determines the number of epochs needed.
+One technique to solve the overfitting issue is called \textbf{early stopping}, and this is presented in Fig. \ref{fig:f36}. The plot is called the model complexity graph. In the Y-axis, there is a measure of the error and in the X-axis is a measure of the complexity of the model. In this case, the measure of complexity is the number of epochs. It is possible to see in the figure that in the left are high testing and training error, hence the model is underfitting. In the right, there are a high testing error and low training error, therefore the model is overfitting. Nevertheless in the middle is the right spot to obtain the best train and test error, the main idea of this plot is to determines the number of epochs needed.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/early.png}
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/early.png}
     \captionsetup{justification=centering}
     \caption{Early stopping}
     \label{fig:f36}
 \end{figure}
 
+Another technique to stop overfitting is called \textbf{regularization}. To explain it, first see the Fig. \ref{fig:f37} which presents two models with exactly the same boundary line. The only difference is that the weights of the model in the right are bigger. This difference in the weights will create a bigger estimate value which being pass through the activation function (sigmoid) will result in values very close to zero and one. However, the left model creates values between zero and one with more disparity. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/regularization.png}
+    \captionsetup{justification=centering}
+    \caption{Early stopping}
+    \label{fig:f37}
+\end{figure}
+
+This particular situation might leads the thought "The right model is the best" despite this is not true. The right model will generate a very well known problem when the gradient descent step is applied which will generate very similar values (0 or 1) when the training is being executed.
+
+One way to prevent this is use L1 (Eq. \eqref{eq:30}) and L2 regularization (Eq. \eqref{eq:31}), which is a technique to prevent the drastic increase in the weights of the network.
+
+\[\text{Large Coefficientes} \rightarrow \text{Overfitting}\]
+
+\begin{equation}
+\label{eq:30}
+\text{L1 Error function} = - \frac{1}{m} \sum_{i=1}^m y_i\ln{(\hat{y})} + (1 - y_i) (\ln{(1 - \hat{y})} + \lambda (|w_1|+\dots+|w_n|))
+\end{equation}
+
+\begin{equation}
+\label{eq:31}
+\text{L2 Error function} = - \frac{1}{m} \sum_{i=1}^m y_i\ln{(\hat{y})} + (1 - y_i) (\ln{(1 - \hat{y})} + \lambda (w_1^2+\dots+w_n^2))
+\end{equation}
+
+The main difference between L1 and L2 is that L1 is good for feature selection because at the end the model end up with sparse vectors \([0,1,1,0,0]\) this means that small weights then to go to zero and big ones to one. However, L2 is normally better for training models because it tries to maintain all the weights homogeneously small \([0.2, 0.5, 0.7 ,0.9, 0.2]\).
 \printbibliography
 
 \end{document}
-
