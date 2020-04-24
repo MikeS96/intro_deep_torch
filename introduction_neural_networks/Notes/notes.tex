@@ -881,6 +881,11 @@ There is a problem related to the application of the backpropagation algorithm t
     \label{fig:f38}
 \end{figure}
 
+One way to solve the local minimum issue is to do \textbf{random restarts} as a very simple approach. The model starts from a few different random places and do gradient descend from all of them. This increases the probability that the model gets to the global minimum, or at least a pretty good local minimum.
+
+\textbf{Vanishing gradient} is caused when the derivative of the activation function is small. The sigmoid function is an example of this, the derivative of the regions that are close to one or zero are almost zero, leading to a very small gradient and complicating the propagation of the error backwards (the training process requires non-zero values of gradients). This problem gets even worse when more layers are added to the neural network, increasing the number of activation functions and hence, reducing the gradient of the error towards zero.
+
+
 \printbibliography
 
 \end{document}
