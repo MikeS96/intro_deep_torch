@@ -883,8 +883,32 @@ There is a problem related to the application of the backpropagation algorithm t
 
 One way to solve the local minimum issue is to do \textbf{random restarts} as a very simple approach. The model starts from a few different random places and do gradient descend from all of them. This increases the probability that the model gets to the global minimum, or at least a pretty good local minimum.
 
-\textbf{Vanishing gradient} is caused when the derivative of the activation function is small. The sigmoid function is an example of this, the derivative of the regions that are close to one or zero are almost zero, leading to a very small gradient and complicating the propagation of the error backwards (the training process requires non-zero values of gradients). This problem gets even worse when more layers are added to the neural network, increasing the number of activation functions and hence, reducing the gradient of the error towards zero.
+\textbf{Vanishing gradient} is caused when the derivative of the activation function is small. The sigmoid function is an example of this, the derivative of the regions that are close to one or zero are almost zero, leading to a very small gradient and complicating the propagation of the error backwards (tiny values of gradient leads to small changes in the weights during the training process). This problem gets even worse when more layers are added to the neural network, increasing the number of activation functions and hence, reducing the gradient of the error towards zero.
 
+A solution to the vanishing gradient problem is the use of different activation functions. One of these is the hyperbolic tangent function Eq. \eqref{eq:32} or the rectified linear unit (ReLU) Eq. \eqref{eq:33}
+
+\begin{equation}
+\label{eq:32}
+tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\end{equation}
+
+\begin{equation}
+\label{eq:33}
+relu(x) = \begin{cases} 
+            x & \text{if } x \geq 0  \\
+            0 & \text{if } x < 0
+            \end{cases}
+\end{equation}
+
+The ReLU activation function can be seen in Fig. \ref{fig:f39}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/relu.png}
+    \captionsetup{justification=centering}
+    \caption{ReLU activation function}
+    \label{fig:f39}
+\end{figure}
 
 \printbibliography
 
