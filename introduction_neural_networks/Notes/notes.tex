@@ -539,7 +539,7 @@ In order to calculate the derivative of this error with respect to the weights, 
 
 The last equality is because the only term in the sum which is not a constant with respect to \(w_j\) is \( w_jx_j\) which clearly has derivative \(x_j\).
 
-Reall that the gradient descent is based on the chain rule, which would be the one described in Eq. \eqref{eq:18}
+Reall that the gradient descent is based on the chain rule, which would be the one described in Eq. \eqref{eq:18} where \(\theta = Wx + b\)
 
 \begin{equation}
 \label{eq:18}
@@ -655,7 +655,7 @@ Neural networks have a certain special \textbf{architecture} with layers. The fi
 
 Finally, \textbf{adding more outputs} creates multiple categories and opens the possiblity to classify different things like cat, dogs or birds. \textbf{Note:} if the model has multiple outputs, it is necessary to change the activation in the last function for a Softmax activation function and add as many outputs as classes are present in the problem. This activation function will guarantee a probability distribution in the last layer and will show which of the classes is the selected one with the highest probability.
 
-\textbf{Feedforward} is the process neural networks use to turn the input into an output, passing the whole data throughout the network. In the Fig. \ref{fig:f31} is an example of this with a network with two input layers, two hidden units and one output. The Weights \(W^{1}\) corresponds to the weights between the input layer and the hidden layer, for a matter of simplicity, the bias was added to this set of weights. Similarly, the weights \(W^{2}\) are between the hidden layer and the output layer. Mathematically, the feedforward process can be expressed as shown by Eq. \eqref{eq:23}.
+\textbf{Feedforward} is the process neural networks use to turn the input into an output, passing the whole data throughout the network. In the Fig. \ref{fig:f31} is an example of this with a network with two input layers, two hidden units and one output. The Weights \(W^{1}\) corresponds to the weights between the input layer and the hidden layer, for a matter of simplicity, the bias was added to this set of weights. Similarly, the weights \(W^{2}\) are between the hidden layer and the output layer. Mathematically, the feedforward process can be expressed as shown by Eq. \eqref{eq:23}. \textbf{Note:} the bias are now denoted as \(W_{31}^{(1)}, W_{32}^{(1)}, W_{31}^{(2)}\)
 
 \begin{equation}
 \label{eq:23}
@@ -691,7 +691,122 @@ Equation \eqref{eq:23} can be simplied into Eq. \eqref{eq:24}. As a rule of thum
 
 The error function for a multi-layer perceptron is exactly the same used for the perceptron algorithm which is Eq. \eqref{eq:14} or the Cross-entropy. Similarly, \(\hat{y} = \sigma(Wx + b)\) but for a neural netowrk with multiple layers, the only difference is that \(\hat{y}\) is more complex and is a combination of multiplications and sigmoid functions as shown here \[\hat{y} = \sigma W^{(3)} \cdot \sigma W^{(2)} \cdot \sigma W^{(1)} \cdot X \]
 
+\textbf{Backpropagation} is the method used to train multilayer perceptrons or deep neural networks. At a glance, this is the opposite process of feeding forward a neural network, to propagate the error backwards and correct the value of the weights towards a good model or solution. The steps for this algorithm are:
+
+\begin{itemize}
+  \item Doing a feedforward operation.
+  \item Comparing the output of the model with the desired output.
+  \item Calculating the error.
+  \item Running the feedforward operation backwards (backpropagation) to spread the error to each of the weights.
+  \item Use this to update the weights, and get a better model.
+  \item Continue this until we have a model that is good.
+\end{itemize}
+
+To start, recall that for the perceptron algorithm, the prediction was given by Eq. \eqref{eq:9}, the error is the cross-entropy (Eq. \eqref{eq:14}) and the objective is to calculate the gradient of the error function \(\nabla E = \frac{\partial E}{\partial w_1}, \dots, \frac{\partial E}{\partial w_n}, \frac{\partial E}{\partial b}\).
+    
+For a multilayer perceptron as the one presented in Fig. \ref{fig:f31}, The prediction is given by Eq. \eqref{eq:25}, the error function is exactly the same as in the perceptron algorithm Eq. \eqref{eq:14} and the gradients of the error are the same but with way more calculations Eq. \eqref{eq:26}.
+    
+\begin{equation}
+\label{eq:25}
+\hat{y} = \sigma W^{(3)} \cdot \sigma W^{(2)} \cdot \sigma W^{(1)} \cdot X
+\end{equation}
+
+\begin{equation}
+\label{eq:26}
+\nabla E = (\dots, \frac{\partial E}{\partial w_j^i}, \dots)
+\end{equation}
+    
+Writing this more formally, the prediction is a composition of matrix multiplications and sigmoid functions.
+
+\[\hat{y} = \sigma W^{(2)} \cdot \sigma W^{(1)} \cdot x\]
+
+Where: 
+
+\[ W^{(1)} = \begin{pmatrix}
+                                W_{11}^{(1)} & W_{12}^{(1)} \\
+                                W_{21}^{(1)} & W_{22}^{(1)} \\
+                                W_{31}^{(1)} & W_{32}^{(1)}
+                                \end{pmatrix} \]
+
+\[ W^{(2)} = \begin{bmatrix}
+               W_{11}^{(2)} \\
+               W_{21}^{(2)} \\
+               W_{31}^{(2)}
+             \end{bmatrix}\]
+                                
+With a gradient that can be formalized as (in reality \(\nabla E\) is a long vector: 
+
+\[ \nabla E = \begin{pmatrix}
+                                \frac{\partial E}{\partial W_{11}^{(1)}} & \frac{\partial E}{\partial W_{12}^{(1)}} & \frac{\partial E}{\partial W_{11}^{(2)}} \\
+                                \frac{\partial E}{\partial W_{21}^{(1)}} & \frac{\partial E}{\partial W_{22}^{(1)}} & \frac{\partial E}{\partial W_{11}^{(2)}} \\
+                                \frac{\partial E}{\partial W_{31}^{(1)}} & \frac{\partial E}{\partial W_{32}^{(1)}} & \frac{\partial E}{\partial W_{11}^{(2)}} 
+                                \end{pmatrix} \]
+                                
+The update step for the backpropagation would be Eq. \eqref{eq:27}:
+
+\begin{equation}
+\label{eq:27}
+W_{ij}^{'k} \leftarrow W_{ij}^{k} + \alpha \frac{\partial E}{\partial W_{ij}^{(k)}}
+\end{equation}
+
+At this point is important to recall the chain rule, which is presented in the Fig. \ref{fig:f32}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/chain_rule.png}
+    \captionsetup{justification=centering}
+    \caption{The chain rule}
+    \label{fig:f32}
+\end{figure}
+
+\[\frac{\partial B}{\partial x} = \frac{\partial B}{\partial A} \frac{\partial A}{\partial x}\]
+
+To start with the calculation of the backgropagation algorithm, the first step is to do a forward pass. The hidden nodes and the output nodes have been labeled \(h_1, h_2, h\) respectively Fig. \ref{fig:f33}. The equation of these nodes is given as follows.
+
+\[h_1 = W_{11}^{(1)}x_1 +  W_{21}^{(1)}x_2 + W_{31}^{(1)}\]
+\[h_2 = W_{12}^{(1)}x_1 +  W_{22}^{(1)}x_2 + W_{32}^{(1)}\]
+\[h = W_{11}^{(2)}\sigma(h_1) + W_{21}^{(2)}\sigma(h_2) + + W_{31}^{(2)}\]
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/feedforward_pass.png}
+    \captionsetup{justification=centering}
+    \caption{A feedforward pass in a MLP}
+    \label{fig:f33}
+\end{figure}
+
+Similarly, the prediction is:
+
+\[\hat{y} = \sigma(h)\]
+
+\[\hat{y} = \sigma W^{(2)} \cdot \sigma W^{(1)} \cdot x\]
+
+To backpropagate the error it is neccesary to calculate the gradients of the error function Eq. \eqref{eq:14} \(E(W) = - \frac{1}{m} \sum_{i=1}^m y_i\ln{(\hat{y})} + (1 - y_i) (\ln{(1 - \hat{y})})\) using the chain rule.
+
+Since the error function is function of the prediction and the prediction is function of the weights the error function can be written as a function of the weights \(W_{ij}^{k}\) as follows:
+
+\[E(W) = E(W_{11}^{(1)}, W_{12}^{(1)}, \dots, W_{31}^{(2)})\]
+
+Therefore, the gradient is the vector formed by all the partial derivatives of the error function E with respect to each of the weights.
+
+\[\nabla E = (\frac{\partial E}{\partial W_{11}^{(1)}}, \dots, \frac{\partial E}{\partial W_{31}^{(2)}})\]
+
+With this information, it is possible to do an example and calculate the partial derivative of the error with respect to \(W_{11}^{(1)}\), this partial derivative is given by the next equation Eq. \eqref{eq:28}.
+
+\begin{equation}
+\label{eq:28}
+\frac{\partial E}{\partial W_{11}^{(1)}} = \frac{\partial E}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial h} \frac{\partial h}{\partial h_1} \frac{\partial h_1}{\partial W_{11}^{(1)}}
+\end{equation}
+
+Where most of the partial derivatives are already know from the perceptron algorithm Eq. \eqref{eq:19}, the only new term is: \(\frac{\partial h}{\partial h_1} \). The partial derivative of this term is giving by Eq. \eqref{eq:29} and is based on the partial derivative of the sigmoid function in Eq. \eqref{eq:17}.
+
+\begin{equation}
+\label{eq:29}
+\frac{\partial h}{\partial h_1} = W_{11}^{(2)} \sigma(h_1)(1 - \sigma(h_1))
+\end{equation}
+
+This process has to be repeated for each of the weights in the neural network but it is mainly the same. If the activation function is changed, then the derivative will change. Nevertheless, the process still being the same and the gradient descent algorithm can be easy applied to different neural networks with multiple layers.
+
 \printbibliography
 
 \end{document}
-
