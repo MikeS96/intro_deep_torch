@@ -823,13 +823,23 @@ In the Fig. \ref{fig:f35} can be seen an example of how a underfitting, just rig
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/under_over.png}
+    \includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/under_over.png}
     \captionsetup{justification=centering}
     \caption{Underfitting and Overfitting models}
     \label{fig:f35}
 \end{figure}
 
 To try to solve this problem, it is better to always try to go for a slightly overfitting model. The idea is to approach as close as possible to the solution and then use some techniques to avoid overfitting.
+
+One technique to solve the overfitting issue is called early stopping, and this is presented in Fig. \ref{fig:f36}. The plot is called the model complexity graph. In the Y-axis, there is a measure of the error and in the X-axis is a measure of the complexity of the model. In this case, the measure of complexity is the number of epochs. It is possible to see in the figure that in the left are high testing and training error, hence the model is underfitting. In the right, there are a high testing error and low training error, therefore the model is overfitting. Nevertheless in the middle is the right spot to obtain the best train and test error, the main idea of this plot is to determines the number of epochs needed.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/early.png}
+    \captionsetup{justification=centering}
+    \caption{Early stopping}
+    \label{fig:f36}
+\end{figure}
 
 \printbibliography
 
