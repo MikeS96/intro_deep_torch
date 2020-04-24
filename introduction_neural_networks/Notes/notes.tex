@@ -904,13 +904,43 @@ The ReLU activation function can be seen in Fig. \ref{fig:f39}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/relu.png}
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/relu.png}
     \captionsetup{justification=centering}
     \caption{ReLU activation function}
     \label{fig:f39}
 \end{figure}
 
+\textbf{Stochastic gradient} descent is a technique to save computation time and find the optimum quicker when the amount of data is huge. The idea behind stochastic gradient descent is simply take small subsets of data, run them through the neural network, calculate the gradient of the error function based on those points and then move one step in that direction. Now, to use all the data it is necessary to split the data into several batches. These batches are then passed through the neural network, one batch per step, until all the batches are passed through the neural network.
+
+This method will eventually converge to a good solution in the model, not as accurate as the one got with the full batch of data. However, in practice it's much better to take a bunch of slightly inaccurate steps than to take one good one in a lot of time.
+
+The learning rate is very important during the training of the model. A very high learning rate will make the model oscillate in a local minimum, whereas a small learning rate will take longer to find the minimum but it will eventually find it. As a rule of thumb, it is always better to work with tiny learning rates Fig. \ref{fig:f40}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/learning_rate.png}
+    \captionsetup{justification=centering}
+    \caption{The impact of learning rates}
+    \label{fig:f40}
+\end{figure}
+
+Finally, another way to solve the local minimum problem is with the use of the Momentum. The idea is to walk a bit fast with momentum and determination in a way that if the model gets stuck in a local minimum, it can sort it off and get over the hump to look for a lower minimum Fig. \ref{fig:f41}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth,height=0.75\textheight,keepaspectratio]{images/momentum.png}
+    \captionsetup{justification=centering}
+    \caption{Momentum}
+    \label{fig:f41}
+\end{figure}
+
+Momentum is a constant \(\beta\) between 0 and 1 that attaches to the steps as follows: the previous step gets multiplied by 1, the one before, by beta, the one before, by beta squared, the one before, by beta cubed, etc (Eq. \eqref{eq:34}). In this way, the steps that happened a long time ago will matter less than the ones that happened recently.
+
+\begin{equation}
+\label{eq:34}
+step(n) = step(n) + \beta(step_{n-1}) + \beta^2(step_{n-2}) + \dots
+\end{equation}
+
 \printbibliography
 
 \end{document}
-
