@@ -807,7 +807,7 @@ Where most of the partial derivatives are already know from the perceptron algor
 
 This process has to be repeated for each of the weights in the neural network but it is mainly the same. If the activation function is changed, then the derivative will change. Nevertheless, the process still being the same and the gradient descent algorithm can be easy applied to different neural networks with multiple layers.
 
-Now that the backpropagtion algorithm has been introduced, it is time to talk about testing. Testing is the process of evaluating a model with two different tests, the training set and the test set. In the Fig. \ref{fig:34} the solid color points are the training set and the points with the white inside are the testing set. The training set is used to train the model without looking the test set and once the model is completely trained, the test set is used to evaluate how good the model is actually doing.
+Now that the backpropagtion algorithm has been introduced, it is time to talk about testing. \textbf{Testing} is the process of evaluating a model with two different tests, the training set and the test set. In the Fig. \ref{fig:f34} the solid color points are the training set and the points with the white inside are the testing set. The training set is used to train the model without looking the test set and once the model is completely trained, the test set is used to evaluate how good the model is actually doing.
 
 \begin{figure}[ht]
     \centering
@@ -816,6 +816,20 @@ Now that the backpropagtion algorithm has been introduced, it is time to talk ab
     \caption{Splitting the data into training and test sets}
     \label{fig:f34}
 \end{figure}
+
+Oversimplifying the problem means trying a solution that is too simple and won't do the job. In machine learning, this is called \textbf{underfitting}. On the other hand, when a solution is overly complicated it will probably leads to bad solutions and extra complexity when a simpler solution was just the answer. In machine learning, this is called \textbf{overfitting}. Generally, an overfitting model fits the data well but it fails when generalizing (error due to variance), whereas an underfitting model generalizes too much and tends to get the dataset bad (error due to bias).
+
+In the Fig. \ref{fig:f35} can be seen an example of how a underfitting, just right and overfitting model looks like.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/under_over.png}
+    \captionsetup{justification=centering}
+    \caption{Underfitting and Overfitting models}
+    \label{fig:f35}
+\end{figure}
+
+To try to solve this problem, it is better to always try to go for a slightly overfitting model. The idea is to approach as close as possible to the solution and then use some techniques to avoid overfitting.
 
 \printbibliography
 
