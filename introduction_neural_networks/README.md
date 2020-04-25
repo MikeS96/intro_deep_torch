@@ -13,7 +13,6 @@ Some of the topics of the course are listed below.
  - Gradient descent
  - Neural networks architecture
  - Multilayer perceptron
- - Gradient Descent
  - Overfitting and underfitting
  - Regularization
  - Among others
