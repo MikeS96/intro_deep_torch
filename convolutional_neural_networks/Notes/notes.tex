@@ -41,10 +41,46 @@ An example of a feature would be what do we look at to distinguish a cat and a d
     \label{fig:f1}
 \end{figure}
 
+To understand neural networks, it is important to also understand how an image is represented in a computer. In the case of gray scale images, these are interpreted by a computer as an array. A grid of values for each grid cell is called a pixel, and each pixel has a numerical value. In the MNIST database, each image is 28 pixels height and wide. Therefore, these images are understood by a computer as a 28 by 28 array. In a typical gray scale image, white pixels are encoded as the value 255, and black pixels are encoded as zero. Gray pixels fall somewhere in between, with light-gray being closer to 255. This description can be easily undertood with Fig. \ref{fig:f2}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/image_representation.png}
+    \captionsetup{justification=centering}
+    \caption{Image representation as a matrix}
+    \label{fig:f2}
+\end{figure}
 
+Nevertheless, the images in the MNIST dataset have actually gone through a quick pre-processing step. They've been re-scaled so that each image has pixel values in a range from zero to one Fig. \ref{fig:f3}. To go from a range of 0-255 to zero and one, it is necessary to divide every pixel value by 25 Eq. \eqref{eq:1}5. This step is called \textbf{normalization}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/image_norm.png}
+    \captionsetup{justification=centering}
+    \caption{Image representation as a normalized matrix}
+    \label{fig:f3}
+\end{figure}
+
+\begin{equation}
+NormX_{ij} = \frac{X_{ij}}{max(X)} \label{eq:1}
+\end{equation}
+
+Normalization is a useful tool to help the algorithm to train better. Thiss tep is quite useful due to neural networks rely on gradient calculations. These networks are trying to learn how important or how weighty a certain pixel should be in determining the class of an image. Normalizing the pixel values helps these gradient calculations stay consistent, and not get so large that they slow down or prevent a network from training.
+
+Recall that to classify objects, the most common technique used for this was to use a MLP or fully connected neural network. However, these networks require 1-dimensional data. Hence, it is necessary to convert any array image into a vector. This process is called \textbf{flattening} and can be seen in Fig. \ref{fig:f4}. In this example, a four-by-four image which is a matrix with 16 pixel values. Instead of representing this as a four-by-four matrix, it is possible to construct a vector with 16 entries, where the first first entries of the vector correspond to the first row of the old array. The second four entries correspond to the second row and so on.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/flattening.png}
+    \captionsetup{justification=centering}
+    \caption{Flattening a simple matrix into a vector}
+    \label{fig:f4}
+\end{figure}
+
+Once an image has been flattened, it is easy to pass the data to a MLP and obtain the classification result of the image.
 
 
 \printbibliography
 
 \end{document}
+
