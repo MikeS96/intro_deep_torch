@@ -130,7 +130,18 @@ The optimizer is used to minimize the error of the loss function and change the 
     \label{fig:f6}
 \end{figure}
 
-A complete solution to the problem described before can be seen in \textit{mnist_mlp_exercise.ipynb}.
+A complete solution to the problem described before can be seen in \textit{mnist\_mlp\_exercise.ipynb}.
+
+To decide whether the model is doing well or bad during training, a new set needs to be introduced. \textbf{The validation set} is defined as a sub-sample of the training set, usually the 20\% of the training set. During training, the training set is used to change the weights and the validation set checks the performance of the model to avoid over-fitting. Finally, once a model has been chosen, a test set is used (this set has never been seen by the network before) to check the accuracy of the trained model. The pipeline described before can be seen in Fig. \ref{fig:f7}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/sets.png}
+    \captionsetup{justification=centering}
+    \caption{Sets the evaluate and train a model}
+    \label{fig:f7}
+\end{figure}
+
 
 \printbibliography
 
