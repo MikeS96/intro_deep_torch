@@ -242,6 +242,39 @@ To apply a filter to an image an operation called convolution needs to be applie
 
 When applying this process to the corners of an image leads to unknown pixel values, techniques as extend, padding or crop are applied in the input image to generate an image of the same size of the input one. 
 
+Getting more into detail, CNNs are a kind of deep learning model that can learn to do things like image classification and object recognition. They keep track of spatial information and learn to extract features like the edges of objects in something called a convolutional layer. The Fig. \ref{fig:f15} shows a simple CNN structure, made of multiple layers.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/layers_cnn.png}
+    \captionsetup{justification=centering}
+    \caption{Layers in a CNN}
+    \label{fig:f15}
+\end{figure}
+
+The convolutional layer is produced by applying a series of many different image filters, also known as convolutional kernels, to an input image Fig. \ref{fig:f16}. In this case, four kernels mean four differently filtered output images.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/conv_layer.png}
+    \captionsetup{justification=centering}
+    \caption{Convolutional layer}
+    \label{fig:f16}
+\end{figure}
+
+When these outputs are stacked it is possible to form a complete convolutional layer with a depth of four Fig. \ref{fig:f17}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/depth.png}
+    \captionsetup{justification=centering}
+    \caption{Depth in a convolutional layer}
+    \label{fig:f17}
+\end{figure}
+
+The main difference between a filter and a convolutional kernel is that neural networks will actually learn the best filter weights as they train on a set of image data. 
+
+
 \printbibliography
 
 \end{document}
