@@ -207,6 +207,41 @@ To measure how the pixels change in an image, the frecuency can be used to ident
 
 High-frequency components in an image also correspond to the edges of objects and can be used to classify them.
 
+In an image, \textbf{filters} are used to filter out unwanted information or amplify features of interest as corners. An example of a filter is a high-pass filter which is used to sharpen an image and enhance high-frecuency parts of an image. In the Fig. \ref{fig:f12} the high-pass filter has enhanced the areas of the image where rapid changes have been presented (emphasizing edges). It is important to mention that this simple filters have to be used on one-channel images.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/high_pass.png}
+    \captionsetup{justification=centering}
+    \caption{Image after a High-pass filter}
+    \label{fig:f12}
+\end{figure}
+
+A filter or convolutional filter is just a matrix of numbers that modifies the image. A high-ass filter is the one shown in Fig. \ref{fig:f13}. For edge detection, all the values inside the filter must add to zero.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.2\textwidth,height=0.2\textheight,keepaspectratio]{images/filter.png}
+    \captionsetup{justification=centering}
+    \caption{High-pass filter}
+    \label{fig:f13}
+\end{figure}
+
+To apply a filter to an image an operation called convolution needs to be applied to the image. In this operation, the kernel sweeps the whole image, multiplying value by value the pixel and kernel. Finally, all the values are added and the result is places in a new image which will counting the result of the convolution. The image Fig. \ref{fig:f14} shows this convolution process in a simple set of pixels in an image. Is is important to mention that the convolution is denoted by the symbol \(\*\).
+
+\[K * I(x,y) = \text{resulting image}\]
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/convolution.png}
+    \captionsetup{justification=centering}
+    \caption{The convolution process}
+    \label{fig:f14}
+\end{figure}
+
+When applying this process to the corners of an image leads to unknown pixel values, techniques as extend, padding or crop are applied in the input image to generate an image of the same size of the input one. 
+
 \printbibliography
 
 \end{document}
