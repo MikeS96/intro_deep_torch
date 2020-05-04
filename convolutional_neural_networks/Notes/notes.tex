@@ -193,6 +193,21 @@ A convolutional neural network is a special kind of neural network which can rem
 
 The key to preserving the \textbf{spatial information} in CNNs is called the convolutional layer. A \textbf{convolutional layer} applies a series of different image filters also known as \textbf{convolutional kernels} to an input image. The resulting filtered images have different appearances. The filters may have extracted features like the edges of objects in that image, or the colors that distinguish the different classes of images.
 
+Spatial patterns in an image can be for example color or shape. The changes in shape can be described as the change of intensity in a group of pixels. These changes can be used to detect objects in an image. It is possible to identify these changes with convolutional kernels with a specific form and values.
+
+To measure how the pixels change in an image, the frecuency can be used to identify the rate of change. A high frequency image Fig. \ref{fig:f11} is one where the intensity changes a lot  and the level of brightness changes quickly from one pixel to the next (pink square). A low frequency image may be one that is relatively uniform in brightness or changes very slowly (blue square). 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/frec.png}
+    \captionsetup{justification=centering}
+    \caption{High and low frecuency image patterns}
+    \label{fig:f11}
+\end{figure}
+
+High-frequency components in an image also correspond to the edges of objects and can be used to classify them.
+
 \printbibliography
 
 \end{document}
+
