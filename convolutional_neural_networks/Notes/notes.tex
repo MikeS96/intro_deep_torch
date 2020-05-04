@@ -153,6 +153,43 @@ Overall, the steps to train a neural network are:
   \item Test the model
 \end{itemize}
 
+Despite that flattening images and using multi-layer perceptrons might sound like a good solution to deal with images, these techniques have a set of drawbacks which affects its implementation in real world images. For example, the MLP only uses fully-connected layers, which for the case of the MNIST dataset is almost half a million parameters. Furthermore, this sort of architecture only support data in the form on vectors whereas the image is a matrix with spatial information which can be relevant around its close neighborhood. 
+
+To sort this problems a new architecture is employed and this is \textbf{called convolutional neural networks (CNNs)}. This networks instead of use fully connected layers use sparsely connected layers where the connection between layers are informed by the 2-D structure of the image matrix. Moreover, this network architecture accepts matrices as inputs. 
+
+To understand the concept of sparsely connected and its benefits, consider breaking the image into four regions Fig. \ref{fig:f8}. The image is painted in four sections: red, green, yellow, and blue. Then, each hidden node could be connected to only the pixels in one of these four regions.Here, each headed node sees only a quarter of the original image. With this regional breakdown and the assignment of small local groups of pixels to different hidden nodes, every hidden node finds patterns in only one of the four regions in the image. Then, each hidden node still reports to the output layer where the output layer combines the findings for the discovered patterns learned separately in each region
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/sparsely.png}
+    \captionsetup{justification=centering}
+    \caption{Sets the evaluate and train a model}
+    \label{fig:f8}
+\end{figure}
+
+This locally connected layer uses far fewer parameters than a densely connected layer. It's less prone to overfitting and truly understands how to tease out the patterns contained in image data. 
+
+Rearranging the vector as a matrix it is possible to see the relationships between the nodes in each layer. It is possible to expand the number of patterns that the network is able to detect while still making use of the 2-D structure to selectively and conservatively add weights to the model by introducing more hidden nodes, where each is still confined to analyzing a single small region within the image. The red nodes in the hidden layer are still only connected to the red nodes in the input layer, with the same color coding for all other colors Fig. \ref{fig:f9}. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/matrix_input.png}
+    \captionsetup{justification=centering}
+    \caption{Arranging the matrix as an input for a CNNs}
+    \label{fig:f9}
+\end{figure}
+
+Recall that by expanding the number of nodes in the hidden layer it is possible to discover more complex patterns in the data. In this case, two collections of hidden nodes is being used where each collection contains nodes responsible for examining a different region of the image as shown by Fig. \ref{fig:f10}. It will prove useful to have each of the hidden nodes within a collection share a common group of weights. The idea being that different regions within the image can share the same kind of information. In other words, every pattern that's relevant towards understanding the image could appear anywhere within the image.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/shared_weights.png}
+    \captionsetup{justification=centering}
+    \caption{Sharing weights in a CNNs}
+    \label{fig:f10}
+\end{figure}
+
+
 \printbibliography
 
 \end{document}
