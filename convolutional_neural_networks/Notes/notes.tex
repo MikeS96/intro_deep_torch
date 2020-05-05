@@ -310,6 +310,18 @@ Another important parameter to use in CNNs is the \textbf{padding}. Zero padding
     \label{fig:f20}
 \end{figure}
 
+In Fig. \ref{fig:f15} is is possible to see that a CNN is composed of Convolutional layers, fully connected and pooling layers. \textbf{Pooling layers} are used as a method to reduce dimensionality and the amount of parameters after a convolution. There are basically two types of pooling layers. The first one is the max pooling layer and it works by just taking the maximum of the pixels contained in the window. Fig. \ref{fig:f21} shows an example of a max pooling layer which extracts the maximum value in each window. In this case, the stride of the max pooling is two. A max pooling layer reduce the size of the feature map to the half, reducing the amount of parameters in the neural network.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/max_pooling.png}
+    \captionsetup{justification=centering}
+    \caption{Max pooling in a feature map}
+    \label{fig:f21}
+\end{figure}
+
+Overall, the general architecture of a convolutional neural network is a set con convolutional layers (with RELU activation function) and max poolign connected and finally flattened to feed a fully connected neural network.
+
 \printbibliography
 
 \end{document}
