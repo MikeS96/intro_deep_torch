@@ -298,6 +298,19 @@ In the Fig. \ref{fig:f19} is a brief explanation of how the filters operates thr
 
 It is important to mention that the multiple 2D outputs of a convolutional layer can be stacked together to generate inputs to more convolutional layers and discover more patterns among the patterns and improve the detection of features in the image. As the fully connected layers, convolutional layers have weights and bias (kernels) which are initially randomly generated and can be trained to achieve a specific task at hand. Overall, training a CNNs determine what kind of patterns it needs to detect based on the loss function, therefore, the filters will be learned based on the given data in the training process.
 
+Besides the filter size and amount of filters, it is possible to tune additional parameters. One parameter is the \textbf{stride} and this is defined as the amount by which the filter slides over the image. For example, a stride of one means that the filter will slide only one pixel horizontally and vertically at each move. A stride of one will result in a feature map of almost the same size of the input image, whereas a stride of 2 will shrink the image in both width and height reducing the feature map size.
+
+Another important parameter to use in CNNs is the \textbf{padding}. Zero padding can be added to an image with the objective to maintain the original image size in the output feature map. This process will allows a better extraction of features and avoid the loss of information in corners. To pad an image it is just necessary to add zeros in the surroundings of the image Fig. \ref{fig:f20}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/padding.png}
+    \captionsetup{justification=centering}
+    \caption{Zero padding}
+    \label{fig:f20}
+\end{figure}
+
 \printbibliography
 
 \end{document}
+
