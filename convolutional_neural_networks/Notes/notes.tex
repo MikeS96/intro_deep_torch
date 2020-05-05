@@ -320,9 +320,32 @@ In Fig. \ref{fig:f15} is is possible to see that a CNN is composed of Convolutio
     \label{fig:f21}
 \end{figure}
 
-Overall, the general architecture of a convolutional neural network is a set con convolutional layers (with RELU activation function) and max poolign connected and finally flattened to feed a fully connected neural network.
+Overall, the general architecture of a convolutional neural network is a set con convolutional layers (with RELU activation function) and max pooling connected and finally flattened to feed a fully connected neural network Fig. \ref{fig:f22}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth,height=0.4\textheight,keepaspectratio]{images/architecture.png}
+    \captionsetup{justification=centering}
+    \caption{CNN common architecture}
+    \label{fig:f22}
+\end{figure}
+
+It is quite important to recall that the max pooling layer is a good alternative to reduce parameter in a CNN. Nevertheless, it throws away some image information.
+
+
+An alternative to classification methods that do not discard spatial information and instead learn to spatial relationships between parts is called \textbf{Capsule Networks}. This network architecture provide a way to detect parts of objects in an image and represent spatial relationships between those parts. This means that capsule networks are able to recognize the same object, like a face, in a variety of different poses and with the typical number of features (eyes, nose , mouth) even if they have not seen that pose in training data. 
+
+Capsule networks are made of parent and child nodes that build up a complete picture of an object Fig. \ref{fig:f23}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\textwidth,height=0.3\textheight,keepaspectratio]{images/faces.png}
+    \captionsetup{justification=centering}
+    \caption{Capsule Networks}
+    \label{fig:f23}
+\end{figure}
+
 
 \printbibliography
 
 \end{document}
-
