@@ -356,6 +356,16 @@ A very important pre-processing step in CNNs is to resize the images to the same
 \end{figure}
 
 
+It is possible to compute the spatial size of the output volume as a function of the input volume size (W), the receptive field size of the Conv Layer neurons (F), the stride with which they are applied (S), and the amount of zero padding used (P) on the border. The equation of the output is given by Eq. \eqref{eq:3}. For example for a 7x7 input and a 3x3 filter with stride 1 and pad 0 the output will be 5x5. With stride 2 the output would be 3x3.
+
+\begin{equation}
+\frac{W - F + 2P} {S + 1}
+\label{eq:3}
+\end{equation}
+
+
+
+
 
 \printbibliography
 
