@@ -310,7 +310,7 @@ Another important parameter to use in CNNs is the \textbf{padding}. Zero padding
     \label{fig:f20}
 \end{figure}
 
-In Fig. \ref{fig:f15} is is possible to see that a CNN is composed of Convolutional layers, fully connected and pooling layers. \textbf{Pooling layers} are used as a method to reduce dimensionality and the amount of parameters after a convolution. There are basically two types of pooling layers. The first one is the max pooling layer and it works by just taking the maximum of the pixels contained in the window. Fig. \ref{fig:f21} shows an example of a max pooling layer which extracts the maximum value in each window. In this case, the stride of the max pooling is two. A max pooling layer reduce the size of the feature map to the half, reducing the amount of parameters in the neural network.
+In Fig. \ref{fig:f15} is is possible to see that a CNN is composed of Convolutional layers, fully connected and pooling layers. \textbf{Pooling layers} are used as a method to reduce dimensionality and the amount of parameters after a convolution. There are basically two types of pooling layers. The first one is the max pooling layer and it works by just taking the maximum of the pixels contained in the window. Fig. \ref{fig:f21} shows an example of a max pooling layer which extracts the maximum value in each window. In this case, the stride of the max pooling is two. A max pooling layer reduce the size of the feature map to the half, reducing the amount of parameters in the neural network. An example of max pooling can be seen in the script \textit{maxpooling\_visualization.ipynb}.
 
 \begin{figure}[ht]
     \centering
@@ -345,7 +345,19 @@ Capsule networks are made of parent and child nodes that build up a complete pic
     \label{fig:f23}
 \end{figure}
 
+A very important pre-processing step in CNNs is to resize the images to the same image size. Typically, the images are resized as a square with the spatial dimension equal to a power of two \(2^x\). Fig. \ref{fig:f24} presents the general architecture of a CNN and this is as follows. It began with convolutional layers which detect regional patterns in an image using a series of image filters. Typically a ReLu activation function is applied to the output of these filters to standardize their output values. Then max pooling layers, which appear after convolutional layers to reduce the dimensionality of the input arrays. These new layers, along with fully-connected layers, are often the only layers used in this sort of networks.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/full_cnn.png}
+    \captionsetup{justification=centering}
+    \caption{A complete CNN architecture}
+    \label{fig:f24}
+\end{figure}
+
+
 
 \printbibliography
 
 \end{document}
+
