@@ -359,15 +359,43 @@ A very important pre-processing step in CNNs is to resize the images to the same
 It is possible to compute the spatial size of the output volume as a function of the input volume size (W), the receptive field size of the Conv Layer neurons (F), the stride with which they are applied (S), and the amount of zero padding used (P) on the border. The equation of the output is given by Eq. \eqref{eq:3}. For example for a 7x7 input and a 3x3 filter with stride 1 and pad 0 the output will be 5x5. With stride 2 the output would be 3x3.
 
 \begin{equation}
-\frac{W - F + 2P} {S + 1}
+\frac{W - F + 2P} {S} + 1
 \label{eq:3}
 \end{equation}
 
+The number of parameters in a CNN is defined by Eq. \eqref{eq:4}, where \textbf{K} is the number of filters in the convolutional layer, \textbf{F} is the filter size, \textbf{\(D_{in}\)} corresponds to the depth of the previous layer and \textbf{K} is the bias term.
 
+\begin{equation}
+Param = K * F * F * D_{in}  + K
+\label{eq:4}
+\end{equation}
 
+The idea behind the amount of layers in a CNNs is to extract the most revelant information of an image and finally, flatten it to construct a feature vector which can feed a fully connected layer. The general pipeline of a CNN with a fully connected layer is given in Fig. \ref{fig:f25}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth,height=0.75\textheight,keepaspectratio]{images/fcn.png}
+    \captionsetup{justification=centering}
+    \caption{A complete CNN architecture with fully connected layers}
+    \label{fig:f25}
+\end{figure}
+
+An implementation of a CNN can be seen in \textit{cifar10\_cnn.ipynb} where a fully convolutional neural network was used to classify the Cifar-10 dataset.
+
+It is important that a CNN learns an invariant representation of the image which does not get affected by changes in scale, position, or angle in the interest object. Scale invariance is when the algorithm does not get affected by changes of size of the object in the image. Rotation invariance is immunity to change in the angle of the object in the image. Finally, translation invariance is when the algorithm is not affected by changes in the position of the object in the image frame.
+
+To generate a CNN statically invariant and make it robust against those changes, it is necessary to apply a technique called \textbf{image augmentation}. This technique will allow the creation of artificial data with random rotation, translations and scale changes that will allow the algorithm to generalize better over different variations in an image. The Fig. \ref{fig:f26} shows an example of image augmentation in an image with an avocado, realizing changes in the position and orientation of the object. This technique is quite important because it prevents over fitting and improves generalization of the CNN.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/augmentation.png}
+    \captionsetup{justification=centering}
+    \caption{Data augmentation}
+    \label{fig:f26}
+\end{figure}
+
+The code \textit{cifar10\_cnn\_augmentation.ipynb} shows how to do image augmentation to improve generalization over a set of images.
 
 \printbibliography
 
 \end{document}
-
