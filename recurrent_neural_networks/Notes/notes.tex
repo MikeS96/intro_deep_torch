@@ -1,0 +1,132 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[backend=biber]{biblatex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\addbibresource{bib.bib}
+\setlength{\parindent}{0em}
+\bibliography{bib}
+\setlength{\parskip}{6pt}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{url}
+
+\title{Intro to deep learning with PyTorch}
+\author{Miguel A. Saavedra-Ruiz}
+\date{May 2020}
+\linespread{1.0}
+
+\nocite{*}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Recurrent neural networks}
+
+To understand what recurrent neural networks (RNN) are and the difference between RNN and LSTM imagine the next example. Imagine a regular neural network which recognizes images and the image in Fig. \ref{fig:f1} is fitted in the network and the neural neural network guesses that the image is most likely a dog with a small chance of being a wolf and an even smaller chance of being a goldfish. However, what if the image is actually a wolf?
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.25\textwidth,height=0.25\textheight,keepaspectratio]{images/fitting.png}
+    \captionsetup{justification=centering}
+    \caption{Fitting an image in a neural network}
+    \label{fig:f1}
+\end{figure}
+
+To hint the algorithm about what animal it really is, let's say that the wolf appeared in a TV show about nature and the previous image before the wolf was a bear and the previous one was a fox. In this case, the idea is to use this information to hint the algorithm that the last image is a wolf and not a dog. Therefore, a good idea is to analyze each image with the same copy of a neural network. But, using the output of the neural network as a part of the input of the next one Fig. \ref{fig:f2}. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/recurrent.png}
+    \captionsetup{justification=centering}
+    \caption{Feeding a neural network with another neural networl}
+    \label{fig:f2}
+\end{figure}
+
+This should improve the prediction results. Mathematically,it is just the combination of vectors in a linear function, which will then be squished with an activation function, which could be sigmoid or hyperbolic tan. This way the algorithm can use previous information and the final neural network will know that the show is about wild animals in the forest and actually use this information to correctly predict that the image is of a wolf and not a dog.
+
+However, the last architecture has some drawbacks. Imagine that the bear appeared a while ago and the two recent images are a tree and a squirrel Fig. \ref{fig:f3}. Based on those two, it is hard to really know if the new image is a dog or a wolf. Since trees and squirrels are just as associated to domestic animals as they are with forest animals. The information about being in the forest comes all the way back from the bear. However, as it has been seen, information coming in gets repeatedly squished by sigmoid functions, training a network using backpropagation all the way back, will lead to problems such as the vanishing gradient problem. Hence by this point pretty much all the bear information has been lost. That's a problem with recurring neural networks; that the memory that is stored is normally short term memory.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/drawback_rnn.png}
+    \captionsetup{justification=centering}
+    \caption{Drawbacks with RNN}
+    \label{fig:f3}
+\end{figure}
+
+To solve the last problem, LSTMs or long short term memory networks are the solution to this issue. 
+In summary, a RNN works as follows; memory comes in and merges with a current event and the output comes out as a prediction of what the input is and also, as part of the input for the next iteration of the neural network Fig. \ref{fig:f4}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/rnn.png}
+    \captionsetup{justification=centering}
+    \caption{The general RNN architecture}
+    \label{fig:f4}
+\end{figure}
+
+On the other hand, LSTM works as follows; it keeps track not just of memory but of long term memory, which comes in and comes out and also, short term memory, which also comes in and comes out Fig. \ref{fig:f5}. In every stage the long and short term memory in the event get merged. Therefore, a new long term memory, short term memory and a prediction are created. This architecture protects old information more.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/lstm.png}
+    \captionsetup{justification=centering}
+    \caption{The general LSTM architecture}
+    \label{fig:f5}
+\end{figure}
+
+The LSTM architecture can be described using the following example. 
+
+Imagine the next example Fig. \ref{fig:f6} where the long term memory is represented by an elephant, the short term memory by a fish and the event will still be represented by a wolf.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.7\textheight,keepaspectratio]{images/lstm_example.png}
+    \captionsetup{justification=centering}
+    \caption{LSTM example}
+    \label{fig:f6}
+\end{figure}
+
+So LSTM works as follows: the three pieces of information (Long term memory, short term memory and event Fig. \ref{fig:f6}) go inside the node some math happens inside which updates the output. These outputs are a long term memory, a short term memory and the prediction of the event. More specifically the architecture of the LSTM contains something called gates. It contains a forget gate, a learn gate, a remember gate, and a use gate Fig. \ref{fig:f7}.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.7\textheight,keepaspectratio]{images/lstm_example2.png}
+    \captionsetup{justification=centering}
+    \caption{LSTM gates}
+    \label{fig:f7}
+\end{figure}
+
+The detailed explanation of how these gates work is as follows. The long term memory goes to the forget gate where it forgets everything that it doesn't consider useful. The short term memory and the event are joined together in the learn gate, containing the information that the LSTM recently learned and it removes any unnecessary information.
+
+Subsequently, the long term memory that have not been forgotten yet (Forget gate) plus the new information that the node learned (Learn gate) get joined together in the remember gate. Since it's called remember gate, what it does is it outputs an updated long term memory. An example of what a long term memory looks like is seen in Fig. \ref{fig:f7} (this information will be remembered in the future). Finally, the use gate is the one that decides what information will be used from what was previously know plus what the node just learned to make a prediction. Taking both inputs from the long term memory and the short term memory will create new information and hence, create a new short term memory output. The output becomes both the prediction and the new short term memory.
+ 
+Overall, the information from one LSTM cell moves towards another one and another one saving information from the past and propagating it towards the future to produce accurate predictions and keep information from the past Fig. \ref{fig:f8}. The long term memory is denoted as \textbf{LTM} and the short term memory as \textbf{STM}.
+ 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.7\textheight,keepaspectratio]{images/lstm_nodes.png}
+    \captionsetup{justification=centering}
+    \caption{LSTM nodes connection}
+    \label{fig:f8}
+\end{figure}
+ 
+%\begin{equation}
+%L_{content} = \frac{1}{2} \sum(T_c - C_c)^2
+%\label{eq:1}
+%\end{equation}
+
+\printbibliography
+
+
+\end{document}
+
