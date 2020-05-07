@@ -110,7 +110,7 @@ The detailed explanation of how these gates work is as follows. The long term me
 
 Subsequently, the long term memory that have not been forgotten yet (Forget gate) plus the new information that the node learned (Learn gate) get joined together in the remember gate. Since it's called remember gate, what it does is it outputs an updated long term memory. An example of what a long term memory looks like is seen in Fig. \ref{fig:f7} (this information will be remembered in the future). Finally, the use gate is the one that decides what information will be used from what was previously know plus what the node just learned to make a prediction. Taking both inputs from the long term memory and the short term memory will create new information and hence, create a new short term memory output. The output becomes both the prediction and the new short term memory.
  
-Overall, the information from one LSTM cell moves towards another one and another one saving information from the past and propagating it towards the future to produce accurate predictions and keep information from the past Fig. \ref{fig:f8}. The long term memory is denoted as \textbf{LTM} and the short term memory as \textbf{STM}.
+Overall, the information from one LSTM cell moves towards another one and another one saving information from the past and propagating it towards the future to produce accurate predictions and keep information from the past Fig. \ref{fig:f8}. The long term memory is denoted as \textbf{LTM} and the short term memory as \textbf{STM}. It is important to note that the short term memory is the output or the prediction of the network.
  
 \begin{figure}[ht]
     \centering
@@ -120,13 +120,56 @@ Overall, the information from one LSTM cell moves towards another one and anothe
     \label{fig:f8}
 \end{figure}
  
-%\begin{equation}
-%L_{content} = \frac{1}{2} \sum(T_c - C_c)^2
-%\label{eq:1}
-%\end{equation}
+To continue with the explanation of the math behind LSTM, let's first recall the architecture of a RNN Fig. \ref{fig:f9}. Basically what this network does is take the event \(E_t\) and memory \(M_{t-1}\), coming from the previous point in time and apply a simple tanh or sigmoid activation function to obtain the output and then the memory \(M_t\). Specifically, the network joins these two vectors and multiply them by a matrix \(W\) and add a bias \(b\). Finally the output is squished with the tanh function, and that gives us the output \(M_t\) Eq. \eqref{eq:1}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/recurrent_node.png}
+    \captionsetup{justification=centering}
+    \caption{Mathematical operation in a recurrent node}
+    \label{fig:f9}
+\end{figure}
+
+
+\begin{equation}
+M_t = tanh(W[ST M_{t-1}, E_t] + b)
+\label{eq:1}
+\end{equation}
+
+The LSTM architecture is very similar to the recurrent neural network's architecture, except with more nodes inside and with two inputs and outputs since it keeps track of the long- and short-term memories Fig. \ref{fig:f10}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/lstm_node.png}
+    \captionsetup{justification=centering}
+    \caption{Operations behind a LSTM node}
+    \label{fig:f10}
+\end{figure}
+
+Let's start with the explanation of each gate in the LSTM. The \textbf{forget gate} takes a long term memory and it decides what parts to keep and to forget. Mathematically, The long-term memory (LTM) from \(t-1\) comes in and it gets multiplied by a Forget Factor \(ft\) Eq. \eqref{eq:2}. To calculate \(ft\) the short term memory STM and the event information are used as shown by Eq. \eqref{eq:3}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/forget_gate.png}
+    \captionsetup{justification=centering}
+    \caption{The forget gate}
+    \label{fig:f11}
+\end{figure}
+
+
+\begin{equation}
+LTM_{t-1} * ft
+\label{eq:2}
+\end{equation}
+
+
+\begin{equation}
+ft = \sigma(W_f[ST M_{t-1}, E_t] + b_f)
+\label{eq:3}
+\end{equation}
+
 
 \printbibliography
 
 
 \end{document}
-
