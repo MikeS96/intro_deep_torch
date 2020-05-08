@@ -188,11 +188,11 @@ LTM_{t-1} * ft
 
 
 \begin{equation}
-ft = \sigma(W_f[ST M_{t-1}, E_t] + b_f)
+ft = \sigma(W_f[STM_{t-1}, E_t] + b_f)
 \label{eq:3}
 \end{equation}
 
-The remember gate is the simplest. It takes the long-term memory coming out of the Forget Gate and the short-term memory coming out of the Learn Gate and simply combines them together Eq. \eqref{eq:4} (adding them) Fig. \ref{fig:f12}.
+\textbf{The remember gate} is the simplest. It takes the long-term memory coming out of the Forget Gate and the short-term memory coming out of the Learn Gate and simply combines them together Eq. \eqref{eq:4} (adding them) Fig. \ref{fig:f12}. The output of this gate is the new long term memory.
 
 
 \begin{figure}[ht]
@@ -208,7 +208,36 @@ LTM_t = LTM_{t-1} * ft + N_t * i_t
 \label{eq:4}
 \end{equation}
 
+Finally, \textbf{the use gate} uses the long term memory that cames out of the forget gate and the short term memory that cames out of the learned gate, to come up with a new short term memory and an output. Mathematically, it applies
+
+a small neural network on the output of the forget gate using the tanh activation function (Eq. \eqref{eq:7}) and it applies another small neural network on the short term memory and the events using the sigmoid activation function (Eq. \eqref{eq:8}). As a final step, it multiplies these two in order to get the new output Eq. \eqref{eq:9}. The output also worth of the new short term memory Fig. \ref{fig:f14}.
+
+\begin{equation}
+U_t = tanh(W_u LTM_{t-1} * f_t + b_u) 
+\label{eq:7}
+\end{equation}
+
+\begin{equation}
+V_t = \sigma(W_v[STM_{t-1}, E_t] + b_v)
+\label{eq:8}
+\end{equation}
+
+\begin{equation}
+STM_t = U_t * V_t
+\label{eq:9}
+\end{equation}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/use_gate.png}
+    \captionsetup{justification=centering}
+    \caption{The use gate}
+    \label{fig:f14}
+\end{figure}
+
 \printbibliography
 
 
 \end{document}
+
