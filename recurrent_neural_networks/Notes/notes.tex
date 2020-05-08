@@ -236,8 +236,36 @@ STM_t = U_t * V_t
     \label{fig:f14}
 \end{figure}
 
+Putting together all the gates will result again in the Fig. \ref{fig:f7}. As a reminder it works as follows: The forget gate takes the long-term memory and forgets part of it. The learn gate puts the short-term memory together with the event as the information recently learned. The remember gate joins the long-term memory that has not yet forgotten plus the new information learned in order to update the long-term memory and output it. Finally, the use gate also takes the information recently learned together with long-term memory that haven't yet been forgotten, and it uses it to make a prediction and update the short-term memory.
+
+To introduce the Long term memory term in the forget factor for example, it is necessary to just connect the LTM into the neural network that calculates the forget factor.
+
+Mathematically, this means that the input matrix is larger since the LTM is also concatenating with the long-term memory matrix Eq. \eqref{eq:10}. This is called a\textbf{ peephole connection} since now the long-term memory has more access into the decisions made inside the LSTM. This can be seen in Fig. \ref{fig:f15} where a peegole connection was add to the forget gate.
+
+\begin{equation}
+ft = \sigma(W_f[LTM_{t-1},STM_{t-1}, E_t] + b_f)
+\label{eq:10}
+\end{equation}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/peehole.png}
+    \captionsetup{justification=centering}
+    \caption{Peehole connections}
+    \label{fig:f15}
+\end{figure}
+
+Similarly, it is possible to do this to all the forget-type nodes in the LSTM and the result will be a LSTM with peephole connections Fig. \ref{fig:f16}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/peehole_lstm.png}
+    \captionsetup{justification=centering}
+    \caption{Peehole connections in a LSTM}
+    \label{fig:f16}
+\end{figure}
+
 \printbibliography
 
 
 \end{document}
-
