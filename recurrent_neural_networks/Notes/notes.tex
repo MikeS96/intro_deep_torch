@@ -146,7 +146,31 @@ The LSTM architecture is very similar to the recurrent neural network's architec
     \label{fig:f10}
 \end{figure}
 
-Let's start with the explanation of each gate in the LSTM. The \textbf{forget gate} takes a long term memory and it decides what parts to keep and to forget. Mathematically, The long-term memory (LTM) from \(t-1\) comes in and it gets multiplied by a Forget Factor \(ft\) Eq. \eqref{eq:2}. To calculate \(ft\) the short term memory STM and the event information are used as shown by Eq. \eqref{eq:3}.
+Let's start with the explanation of each gate in the LSTM. \textbf{The learn gate} by taking the short term memory and the event and it joins it. Additionally, it takes the short term memory and the event and it combines them and then it ignores a bit of it keeping the important part of it. Mathematically, it takes the short term memory \(STM_{t-1}\) and the event \(E_t\) and it combines them by putting them through a linear function which consists of joining the vectors multiplying by a matrix adding a bias and finally squishing the result with a tanh activation function Eq. \eqref{eq:4}.
+
+\begin{equation}
+N_t =  tanh(W_n[STM_{t-1}, E_t] + b_n)
+\label{eq:5}
+\end{equation}
+
+To ignore information, an ignore factor \(i_t\) is introduces. This factor i actually a vector but it multiplies element wise. To calculate this vector previous information of the short term memory and the eventt are used. The Eq. \eqref{eq:6} describes the mathematical equation to compute this factor and the Fig. \ref{fig:f13} presents the learn gate pipeline.
+
+\begin{equation}
+i_t =  \sigma(W_i[STM_{t-1}, E_t] + b_i)
+\label{eq:6}
+\end{equation}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/learn_gate.png}
+    \captionsetup{justification=centering}
+    \caption{The learn gate}
+    \label{fig:f13}
+\end{figure}
+
+
+
+The \textbf{forget gate} takes a long term memory and it decides what parts to keep and to forget Fig. \ref{fig:f11}. Mathematically, The long-term memory (LTM) from \(t-1\) comes in and it gets multiplied by a Forget Factor \(ft\) Eq. \eqref{eq:2}. To calculate \(ft\) the short term memory STM and the event information are used as shown by Eq. \eqref{eq:3}.
 
 \begin{figure}[ht]
     \centering
@@ -168,6 +192,21 @@ ft = \sigma(W_f[ST M_{t-1}, E_t] + b_f)
 \label{eq:3}
 \end{equation}
 
+The remember gate is the simplest. It takes the long-term memory coming out of the Forget Gate and the short-term memory coming out of the Learn Gate and simply combines them together Eq. \eqref{eq:4} (adding them) Fig. \ref{fig:f12}.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/remember_gate.png}
+    \captionsetup{justification=centering}
+    \caption{The remember gate}
+    \label{fig:f12}
+\end{figure}
+
+\begin{equation}
+LTM_t = LTM_{t-1} * ft + N_t * i_t
+\label{eq:4}
+\end{equation}
 
 \printbibliography
 
