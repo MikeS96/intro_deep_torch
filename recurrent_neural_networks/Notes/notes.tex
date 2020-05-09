@@ -347,8 +347,19 @@ Finally, the last configuration is called vector to sequence Fig. \ref{fig:f23}.
     \label{fig:f23}
 \end{figure}
 
+To correctly feed a sequence of words, audio or data in a recurrent neural network, it is necessary to understand the concept of sequence batching. To understand this concept, lets use an example Fig. \ref{fig:f24}. 
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/sequence_batching.png}
+    \captionsetup{justification=centering}
+    \caption{Sequence batching}
+    \label{fig:f24}
+\end{figure}
 
+Imagine a sequence of numbers from 1 to 12. This sequence can be passed into a RNN as one sequence. However, it is possible to split it in half and pass in two sequences. The batch size corresponds to the number of sequences now used hence, the batch size is 2. Along with the batch size it is also possible to choose the length of the sequences that will be feed to the network. For example, let's consider using a sequence length three. Then the first batch of data that will pass into the network are the first 3 values in each mini sequence. The next batch contains the next three values and so on until the data is over Fig. \ref{fig:f24}. It is possible to retain the hidden state from one batch and use it at the start of the next batch. This way the sequence information is transferred across batches for each mini sequence.
+
+A complete exercise with LSTM inplemente in IPython can be seen at \textit{Character\_Level\_RNN.ipynb}.
 \printbibliography
 
 
