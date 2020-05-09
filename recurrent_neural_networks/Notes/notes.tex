@@ -265,7 +265,89 @@ Similarly, it is possible to do this to all the forget-type nodes in the LSTM an
     \label{fig:f16}
 \end{figure}
 
-A simple implementation of a RNN can be seen in Simple\_RNN.ipynb. 
+A simple implementation of a RNN to analize a time-serie of data can be seen in Simple\_RNN.ipynb.
+
+Despite the simplicity of simple RNN and the lots of improvements provided by LSTM cells. There are other recurrent network's architectures that are quite powerful. One of these is \textbf{the Gate Recurrent Unit} (GRU). 
+
+The GRU combines the forget and the learn gate into an update gate and then runs this through a combine gate. It only returns one working memory instead of a pair of long and short-term memories. Nevertheless, this network architecture works very well in practice Fig. \ref{fig:f17}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/gru.png}
+    \captionsetup{justification=centering}
+    \caption{The gate recurrent unit}
+    \label{fig:f17}
+\end{figure}
+
+To explain better the general workflow of a recurrent neural network and its architecture, it is necessary to go back to the fundamental recurrent unit Fig. \ref{fig:f18}. The recurrent neural network is like a common neuron unit, except that it has feedback from its output. Unrolling the recurrent unit leads to the representation in the right of Fig. \ref{fig:f18}. The first input at \(t = t-1\) is the first input, then the output of this time is feed to the \textbf{same} recurrent unit at \(t = t\) and so on. The recurrent unit is just a simple unit, nevertheless, for better comprehension it is better to unroll it and see its behavior with the data in multiple time steps. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\textwidth,height=0.55\textheight,keepaspectratio]{images/unrolling.png}
+    \captionsetup{justification=centering}
+    \caption{Unrolling a recurrent neural network}
+    \label{fig:f18}
+\end{figure}
+
+Furthermore, it is also possible to connect multiple recurrent units in a layer. This sort of configuration will lead to better interpretation of data in series. The Fig. \ref{fig:f19} shows the connection between one input unit and three hidden units. At the end, the output of the three recurrent units \(y\) is then feed into the three units again to generate the output at the next time step. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth,height=0.65\textheight,keepaspectratio]{images/mutiple_memorycells.png}
+    \captionsetup{justification=centering}
+    \caption{A layer with three recurrent units}
+    \label{fig:f19}
+\end{figure}
+
+At this point, it is important to mention that a recurrent unit has two sets of weights, \(W_x, W_y\). \(W_x\) can be interpreted as the set of weights between the input units and the recurrent units. \(W_y\) is the set of weights between the output of the recurrent units and the hidden units. Therefore, in the first pass the equation of the output of the recurrent units in Fig. \ref{fig:f19} would be.
+
+\[y_0 = \sigma(W_x * x + b)\]
+
+Once the first time step has passed, the output with feedback at the second time step will be.
+
+\[y_1 = \sigma(W_x * x + W_y * y_0 + b)\]
+
+This process is repeated and repeated until the sequence of data is over. Unrolling a the recurrent neural network with three hidden unit in Fig. \ref{fig:f19} leads to the Fig. \ref{fig:f20} where is possible to see how the layer of hidden units is unrolled and its input is then used to feed the next time step.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{images/unrolling_multiple.png}
+    \captionsetup{justification=centering}
+    \caption{Unrolling a recurrent neural network with three recurrent units}
+    \label{fig:f20}
+\end{figure}
+
+There are multiple configurations and uses for this network architectures. The first configuration is called sequence to sequence and this configuration is useful to create a sequence as output from a sequence of data as input Fig. \ref{fig:f21}. An example would be a time series of data of houses sales and the output would be a sequence of sales shifted one time step in the future.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/sequence_sequence.png}
+    \captionsetup{justification=centering}
+    \caption{Sequence to sequence}
+    \label{fig:f21}
+\end{figure}
+
+Another configuration is called sequence to vector and is used to generate a vector out of a sequence of data Fig. \ref{fig:f22}. An example would be sentiments scores, feed a sequence of words (paragraph) and then request a vector indicating whether it was a positive sentiment or a negative sentiment (1 or 0).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/sequence_vector.png}
+    \captionsetup{justification=centering}
+    \caption{Sequence to vector}
+    \label{fig:f22}
+\end{figure}
+
+Finally, the last configuration is called vector to sequence Fig. \ref{fig:f23}. This sort of architecture is used to predict a sequence of data out of a simple vector. An example of this is pass a single image and then request a sequence of words describing the content of the image. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/vector_sequence.png}
+    \captionsetup{justification=centering}
+    \caption{Vector to sequence}
+    \label{fig:f23}
+\end{figure}
+
+
 
 \printbibliography
 
