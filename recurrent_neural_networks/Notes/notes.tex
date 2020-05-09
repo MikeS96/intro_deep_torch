@@ -359,8 +359,17 @@ To correctly feed a sequence of words, audio or data in a recurrent neural netwo
 
 Imagine a sequence of numbers from 1 to 12. This sequence can be passed into a RNN as one sequence. However, it is possible to split it in half and pass in two sequences. The batch size corresponds to the number of sequences now used hence, the batch size is 2. Along with the batch size it is also possible to choose the length of the sequences that will be feed to the network. For example, let's consider using a sequence length three. Then the first batch of data that will pass into the network are the first 3 values in each mini sequence. The next batch contains the next three values and so on until the data is over Fig. \ref{fig:f24}. It is possible to retain the hidden state from one batch and use it at the start of the next batch. This way the sequence information is transferred across batches for each mini sequence.
 
-A complete exercise with LSTM inplemente in IPython can be seen at \textit{Character\_Level\_RNN.ipynb}.
+A complete exercise with LSTM implemented in IPython for text analysis can be seen at \textit{Character\_Level\_RNN.ipynb}.
+
+One application of RNN is \textbf{Sentiment Analysis and Prediction}. The idea is to build a model that can read some text and make a prediction about the sentiment of that text, whether it is positive or negative. It is possible to train such model on a dataset of movie reviews from IMDB that have been labeled either "positive" or "negative". Since this is text data, words in a sequence, this problem is ideal to a RNN which doesn't only consider the individual words, but the order they appear in. This leads to a powerful model for making these types of sentiment predictions. This model is an example of sequence to vector where only the last output will be used.
+
+The implementation of the last mentioned can be found at \textit{Sentiment\_RNN.ipynb}. This implementation deals with the pre-processing of text data, the embedding process, model definition, training and validation. Additionally, only the output of the last sequence is taken to give the final result about the analysis of the movie. 
+
+
+
+
 \printbibliography
 
 
 \end{document}
+
