@@ -80,10 +80,23 @@ The key idea in an autoencoder is that the encoder section is trying to create a
 
 An Stacked autoencoder is the one presented in Fig. \ref{fig:f1} and it basically has more hidden layers and a bigger ability for abstraction.
 
-One of the biggest advantages of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
+One example of a simple autoencoder is presented in the code \textit{Simple\_Autoencoder.ipynb}. This code receives as input the MNIST dataset and the idea is to output the same input digit. This simple autoencoder architecture is presented in Fig. \ref{fig:f4} and it can also be used to denoise data. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/simple_autoencoder.png}
+    \captionsetup{justification=centering}
+    \caption{Simple autoencoder example}
+    \label{fig:f4}
+\end{figure}
+
+
+
+Another adventage of autoencoders of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
 
 
 \printbibliography
 
 
 \end{document}
+
