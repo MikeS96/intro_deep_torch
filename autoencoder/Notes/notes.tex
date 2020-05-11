@@ -172,9 +172,15 @@ o = (i - 1) * s + k - 2p
 \label{eq:5}
 \end{equation}
 
-A implementation of a denoising autoencoder with CNNs can be seen at \textit{Denoising\_Autoencoder\_Exercise.ipynb}. This file receives a noisy MNIST image and the neural network is able to reconstruct the image without noise. The main idea behind a denoising autoencoder is that the network is trained with noisy data and the output is the data without nouse. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise.
+It is important to note that transpose convolution layers can lead to artifacts in the final images, such as checkerboard patterns. This is due to overlap in the kernels which can be avoided by setting the stride and kernel size equal.
 
-Another adventage of autoencoders of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
+An implementation of the Upsampling technique in Pytorch can be seen at \textit{Upsampling.ipynb}. This code is a convolutional autoencoder where the encoder is a simple convolutional layer but the decoder is a set of nearest neighbors upsampling and convolutional layers. It is applied over the MNIST dataset to generate the input digit at the output of the network.
+
+Similarly, an implementation of transpose convolution with Pytorch can be seen at \textit{Convolutional\_Autoencoder\_Exercise.ipynb}. The idea is very similar to the last code but with transpose convolutions instead of upsampling.
+
+Finally, An implementation of a denoising autoencoder with CNNs can be seen at Denoising\_Autoencoder\_Exercise.ipynb. This file receives a noisy MNIST image and the neural network is able to reconstruct the image without noise. The main idea behind a denoising autoencoder is that the network is trained with noisy data and the output is the data without noise. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise. This model is constructed with transposed convolutions.
+
+It is important to mention that another advantage of autoencoders of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
 
 \printbibliography
 
