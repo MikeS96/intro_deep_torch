@@ -80,7 +80,7 @@ The key idea in an autoencoder is that the encoder section is trying to create a
 
 An Stacked autoencoder is the one presented in Fig. \ref{fig:f1} and it basically has more hidden layers and a bigger ability for abstraction.
 
-One example of a simple autoencoder is presented in the code \textit{Simple\_Autoencoder.ipynb}. This code receives as input the MNIST dataset and the idea is to output the same input digit. This simple autoencoder architecture is presented in Fig. \ref{fig:f4} and it can also be used to denoise data. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise.
+One example of a simple autoencoder is presented in the code \textit{Simple\_Autoencoder.ipynb}. This code receives as input the MNIST dataset and the idea is to output the same input digit. This simple autoencoder architecture is presented in Fig. \ref{fig:f4}
 
 \begin{figure}[ht]
     \centering
@@ -90,13 +90,50 @@ One example of a simple autoencoder is presented in the code \textit{Simple\_Aut
     \label{fig:f4}
 \end{figure}
 
+To understand the decoder phase in a convolutional neural network, it is necessary to introduce two additional concepts which make possible the generation of an output image of the same size of the input image. Let's first talk about \textbf{Upsampling}. This technique is basically defined as the opposite of Downsampling and the idea is increase the dimensions of the future map whereas the downsampling method reduce its dimensions. 
 
+There are different techniques for upsampling. The first technique is called \textbf{Nearest Neighbors} and is presented in Fig. \ref{fig:f5}. As the name suggests it takes an input pixel value and copy it to the K-Nearest Neighbors where K depends on the expected output.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/nn.png}
+    \captionsetup{justification=centering}
+    \caption{Nearest Neighbors (Upsampling)}
+    \label{fig:f5}
+\end{figure}
+
+\textbf{Bed Of Nails} is other upsampling technique where the value of the input pixel is copyed at the corresponding position in the output image and filling zeros in the remaining positions Fig. \ref{fig:f6}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth,height=0.45\textheight,keepaspectratio]{images/bn.png}
+    \captionsetup{justification=centering}
+    \caption{Bed of Nails (Upsampling)}
+    \label{fig:f6}
+\end{figure}
+
+Finally, \textbf{Max-Unpooling} which basically takes the maximum among all the values in the kernel. This process is performed by saving the index of the maximum value for every max-pooling layer during the encoding step. The saved index is then used during the Decoding step where the input pixel is mapped to the saved index, filling zeros everywhere else.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth,height=0.75\textheight,keepaspectratio]{images/mn.png}
+    \captionsetup{justification=centering}
+    \caption{Max-Unpooling (Upsampling)}
+    \label{fig:f6}
+\end{figure}
+
+
+
+
+
+A implementation of a denoising autoencoder with CNNs can be seen at \textit{Denoising\_Autoencoder\_Exercise.ipynb}. This file receives a noisy MNIST image and the neural network is able to reconstruct the image without noise. The main idea behind a denoising autoencoder is that the network is trained with noisy data and the output is the data without nouse. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise.
 
 Another adventage of autoencoders of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
 
+https://towardsdatascience.com/transposed-convolution-demystified-84ca81b4baba
+https://towardsdatascience.com/what-is-transposed-convolutional-layer-40e5e6e31c11
 
 \printbibliography
 
 
 \end{document}
-
