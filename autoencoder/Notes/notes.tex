@@ -116,22 +116,65 @@ Finally, \textbf{Max-Unpooling} which basically takes the maximum among all the 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.75\textwidth,height=0.75\textheight,keepaspectratio]{images/mn.png}
+    \includegraphics[width=0.85\textwidth,height=0.85\textheight,keepaspectratio]{images/mn.png}
     \captionsetup{justification=centering}
     \caption{Max-Unpooling (Upsampling)}
     \label{fig:f6}
 \end{figure}
 
+Besides upsampling, there is another popular method used to increase the dimensions of the feature map and this is called \textbf{Trasposed convolution}. This method is widely used and has multiple applications in super image resolution and image segmentation. Usually this method is preferred over upsampling. A Transposed convolution takes an input feature map to generate an output feature map which has a spatial dimension greater than that of the input feature map. This technique uses a kernel whose values are learned during the training procedure.
 
+The transposed convolution has the same parameters as a convolutional layer. The Stride, Padding and kernel size are exactly the same. Nevertheless, it is necessary to introduce new parameters for this process. The first parameter is \(z\) and is defined as the amount of zeros between pixel in the feature map Eq. \eqref{eq:3}, the second parameter is \(p'\) which is the new padding to use in the input feature map Eq. \eqref{eq:4}. The stride in a transposed convolutional layer is defined as \(s' = 1\) and this is always one. It is important to recall that \(k\) is the filter size.
 
+\begin{equation}
+z = s - 1
+\label{eq:3}
+\end{equation}
 
+\begin{equation}
+p' = k - p - 1
+\label{eq:4}
+\end{equation}
+
+The steps to perform a transposed convolution are given as follows:
+
+\begin{itemize}
+  \item Calulate new parameters \(z\) and \(p'\)
+  \item Between each rows and columns of the input, insert \(z\) number of zeros. This increases the size of the input to \((2*i-1),(2*i-1)\)
+  \item Pad the modified input image with \(p'\) number of zeros
+  \item Carry out standard convolution on the image generated from step 3 with a stride length of 1
+\end{itemize}
+
+In the Fig. \ref{fig:f7} are given the steps mentioned above. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.95\textheight,keepaspectratio]{images/transposed_conv.png}
+    \captionsetup{justification=centering}
+    \caption{Transposed convolution}
+    \label{fig:f7}
+\end{figure}
+
+Additionally, Fig. \ref{fig:f8} presents examples of transposed convolutions with different stride and padding.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.95\textheight,keepaspectratio]{images/multiple_convs.png}
+    \captionsetup{justification=centering}
+    \caption{Transposed convolution examples}
+    \label{fig:f8}
+\end{figure}
+
+For a given size of input (\(i\)), kernel (\(k\)), padding (\(p\)) and stride (\(s\)), the size of the output feature map (\(o\)) generated is given by  Eq. \eqref{eq:5}.
+
+\begin{equation}
+o = (i - 1) * s + k - 2p
+\label{eq:5}
+\end{equation}
 
 A implementation of a denoising autoencoder with CNNs can be seen at \textit{Denoising\_Autoencoder\_Exercise.ipynb}. This file receives a noisy MNIST image and the neural network is able to reconstruct the image without noise. The main idea behind a denoising autoencoder is that the network is trained with noisy data and the output is the data without nouse. This is one of the biggest application of autoencoders and as they are able to create a compressed representation of the data, they are very good at reconstructing the data without noise.
 
 Another adventage of autoencoders of autoencoders is that they learn a pretty descent representation of the weights of the a network just with the input. The autoencoders can be used as a initializer and then use the learned weights as the initial ones for a fine-tuning process. This kind of approach have shown good results and ease the training procedure of neural networks.
-
-https://towardsdatascience.com/transposed-convolution-demystified-84ca81b4baba
-https://towardsdatascience.com/what-is-transposed-convolutional-layer-40e5e6e31c11
 
 \printbibliography
 
