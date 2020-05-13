@@ -20,7 +20,7 @@ The content of this repository is expected to by reviewed as follows.
 * [Introduction to PyTorch](https://github.com/MikeS96/intro_deep_torch/tree/master/intro_torch): Implementation of simple perceptron, multi-layer perceptrons and classification examples with Pytorch. Most of the examples were made using the MNIST and Fashion-MNIST dateset. Here is also an example of transfer learning.
 
 <div  align="center">
-<img  src="./convolutional_neural_networks/Notes/images/fashion_mnsit.png" width="330">
+<img  src="./convolutional_neural_networks/Notes/images/fashion_mnist.png" width="330">
 </div>
 
 ### Convolutional Neural Networks
