@@ -53,7 +53,7 @@ The content of this repository is expected to by reviewed as follows.
 
 ### Generative Adversarial Networks (GANs)
 
-* [Generative Adversarial Network](https://github.com/MikeS96/intro_deep_torch/tree/master/gan): Presented the theory behind a GAN networks, how to train them and their potential. Different implementations are given in Pytorch with the MNIST dataset to generate digits and a Deep convolutional GAN to generate new images based on the Street View House Numbers (SVHN) dataset.
+* [Generative Adversarial Network](https://github.com/MikeS96/intro_deep_torch/tree/master/gan): Presented the theory behind GAN networks, how to train them and their potential. Different implementations are given in Pytorch with the MNIST dataset to generate digits and a Deep convolutional GAN to generate new images based on the Street View House Numbers (SVHN) dataset.
 
 <div  align="center">
 <img  src="./convolutional_neural_networks/Notes/images/gan.png" width="330">
